@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Recipe Mate</string>
+    <string name="btn_new_recipe">Add new recipe</string>
+</resources>
