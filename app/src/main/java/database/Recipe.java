@@ -7,20 +7,17 @@ import java.util.ArrayList;
 
 @Entity
 public class Recipe {
-    @PrimaryKey(autoGenerate = true)
-    private long id;
-    private ArrayList<Ingredient> ingredients;
-    private ArrayList<Utensil> utensils;
-    private ArrayList<String> steps;
+    @PrimaryKey
+    private long recipeId;
+    private String name;
     private String cookingTime;
     private String prepTime;
     private double rating;
 
 
-    public Recipe(ArrayList<Ingredient> ingredients, ArrayList<Utensil> utensils, ArrayList<String> steps, String cookingTime, String prepTime, double rating) {
-        this.ingredients = ingredients;
-        this.utensils = utensils;
-        this.steps = steps;
+    public Recipe(long recipeId,String name, String cookingTime, String prepTime, double rating) {
+        this.recipeId = recipeId;
+        this.name = name;
         this.cookingTime = cookingTime;
         this.prepTime = prepTime;
         this.rating = rating;
@@ -30,20 +27,10 @@ public class Recipe {
         this.rating = rating;
     }
 
-    public long getId() {
-        return id;
-    }
+    public String getName() { return name; }
 
-    public ArrayList<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    public ArrayList<Utensil> getUtensils() {
-        return utensils;
-    }
-
-    public ArrayList<String> getSteps() {
-        return steps;
+    public long getRecipeId() {
+        return recipeId;
     }
 
     public String getCookingTime() {
@@ -65,13 +52,12 @@ public class Recipe {
 file structure
     Array : recipes
         Item: recipe
-            Array: ingredients
+            String : name
+            Item: ingredients
                 Int : quantity
                 String : measurement
                 String : ingredient
-            Array: Utensils
-                String : utensil
-            Array: Steps
+            Item: Steps
                 String : step
             String : Cooking time
             String : Prep time

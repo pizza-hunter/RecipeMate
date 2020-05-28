@@ -5,14 +5,15 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class Ingredient {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey(autoGenerate = true) private int id;
 
     private int quantity;
-    private double measurement;
+    private String measurement;
     private String name;
+    private long recipeIngredientID;
 
-    public Ingredient(int quantity, double measurement, String name){
+
+    public Ingredient(int quantity, String measurement, String name){
         this.quantity = quantity;
         this.measurement = measurement;
         this.name = name;
@@ -26,7 +27,7 @@ public class Ingredient {
         return quantity;
     }
 
-    public double getMeasurement() {
+    public String getMeasurement() {
         return measurement;
     }
 
@@ -34,4 +35,27 @@ public class Ingredient {
         return name;
     }
 
+    public long getRecipeIngredientID() {
+        return recipeIngredientID;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setMeasurement(String measurement) {
+        this.measurement = measurement;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setRecipeIngredientID(long recipeIngredientID) {
+        this.recipeIngredientID = recipeIngredientID;
+    }
 }

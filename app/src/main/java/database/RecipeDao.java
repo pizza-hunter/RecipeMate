@@ -1,15 +1,55 @@
 package database;
 
+import androidx.annotation.TransitionRes;
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.Query;
+import androidx.room.Transaction;
 
+import java.util.List;
+
+@Dao
 public interface RecipeDao {
 
     @Insert
-    public void addRecipe(Recipe recipe);
+    void insertRecipe(Recipe recipe);
+
+    @Insert
+    void insertStep(Step step);
+
+    @Insert
+    void insertIngredient(Ingredient ingredient);
 
     @Delete
-    public void removeRecipe(Recipe recipe);
+    void removeRecipe(Recipe recipe);
 
+    @Query("SELECT * FROM recipe")
+    List<Recipe> getAllRecipes();
+
+    @Query("SELECT * FROM recipe WHERE name LIKE :searchName")
+    Recipe findRecipeByName(String searchName);
+
+    @Transaction
+    @Query("SELECT * FROM Recipe")
+    List<RecipeWithIngredients> getRecipesWithIngredients();
+
+    @Transaction
+    @Query("SELECT * FROM Recipe")
+    List<RecipeWithSteps> getRecipesWithSteps();
+
+    @Transaction
+    @Query("SELECT * FROM Ingredient " +
+            "INNER JOIN Recipe ON Recipe.recipeId = recipeIngredientID " +
+            "WHERE recipeId = :clickedRecipeID"
+    )
+    List<Ingredient> getRecipeIngredients(long clickedRecipeID);
+
+    @Transaction
+    @Query("SELECT * FROM Step " +
+            "INNER JOIN Recipe ON Recipe.recipeId = recipeStepID " +
+            "WHERE recipeId = :clickedRecipeID"
+    )
+    List<Step> getRecipeSteps(long clickedRecipeID);
 
 }

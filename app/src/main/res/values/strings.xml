@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Recipe Mate</string>
     <string name="btn_new_recipe">Add new recipe</string>
+    <string name="edit_new_recipe_name">Name your recipe!</string>
+    <string name="edit_new_recipe_cooking_time">Please enter cooking time</string>
+    <string name="edit_new_recipe_prep_time">Please enter preparation time</string>
+    <string name="txt_new_recipe_rating">Rate this recipe</string>
+    <string name="btn_save">Save</string>
 </resources>

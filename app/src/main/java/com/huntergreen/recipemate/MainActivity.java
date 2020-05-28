@@ -1,38 +1,25 @@
 package com.huntergreen.recipemate;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import database.RecipeDB;
+
  /*
     todo: query free space on device before accessing local app-specific data https://developer.android.com/training/data-storage/app-specific#query-free-space
-
-
-    file structure
-    Array : recipes
-        Item: recipe
-            Array: Ingredients
-                Int : quantity
-                String : measurement
-                String : ingredient
-            Array: Utensils
-                String : utensil
-            Array: Steps
-                String : step
-            String : Cooking time
-            String : Prep time
-            Int : Rating (5 stars)
-
 
  */
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private boolean memoryStructureInitiated;
+    RecipeDB db = Room.databaseBuilder(getApplicationContext(),
+            RecipeDB.class, "RecipeDatabase").build();
 
 
     @Override
@@ -40,17 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(!memoryStructureInitiated){
-            initialiseMemory();
-        }
-    }
 
-    private void initialiseMemory() {
-
-
-
-
-        memoryStructureInitiated = true;
     }
 
 
