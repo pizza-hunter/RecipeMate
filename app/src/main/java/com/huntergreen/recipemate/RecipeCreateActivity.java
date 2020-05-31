@@ -96,14 +96,6 @@ public class RecipeCreateActivity extends AppCompatActivity {
         });
     }
 
-    private void showLayout(View layout) {
-        layout.setVisibility(View.VISIBLE);
-    }
-
-    private void hideLayout(View layout) {
-        layout.setVisibility(View.GONE);
-    }
-
     private void createToast(String message) {
         //todo:empty method
     }
