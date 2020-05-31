@@ -7,4 +7,10 @@
     <string name="txt_new_recipe_rating">Rate this recipe</string>
     <string name="btn_save">Save</string>
     <string name="logo_image_description">Place logo of choice here</string>
+    <string name="edit_new_ingredient">1kg potatoes</string>
+    <string name="edit_new_step">Write long detailed steps!</string>
+    <string name="title_new_recipe_activity">Create a recipe</string>
+    <string name="txt_ingredient_title">Ingredients</string>
+    <string name="txt_step_title">Steps</string>
+    <string name="btn_add">Add</string>
 </resources>
