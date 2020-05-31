@@ -14,6 +14,7 @@ import android.widget.RatingBar;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import database.Ingredient;
@@ -29,11 +30,13 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
     //Ingredient section
     private List<Ingredient> ingredients;
+    private ArrayList<String> ingredientStrings;
     private EditText ingredientEditText = findViewById(R.id.ingredientNameEditText);
     private ListView ingredientListView = findViewById(R.id.ingredientListView);
 
     //Steps section
     private List<Step> steps;
+    private ArrayList<String> stepStrings;
     private EditText stepEditText = findViewById(R.id.stepEditText);
     private ListView stepListView = findViewById(R.id.stepListView);
     private int stepCounter;
@@ -57,6 +60,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
                 if(stepEditText.getText() != null){
                     Step step = new Step(stepEditText.getText().toString(), stepCounter);
                     steps.add(step);
+                    stepStrings.add(step.getStep());
                     stepCounter++;
                     updateStepListView();
                 }
@@ -82,6 +86,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
                 if(ingredientEditText.getText() != null){
                     Ingredient ingredient = new Ingredient(ingredientEditText.getText().toString());
                     ingredients.add(ingredient);
+                    ingredientStrings.add(ingredient.getIdentifier());
                     updateIngredientListView();
                 }
                 createToast("Please enter an ingredient");
