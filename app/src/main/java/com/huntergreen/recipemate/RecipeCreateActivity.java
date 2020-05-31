@@ -38,7 +38,6 @@ public class RecipeCreateActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         stepCounter = 0;
-
         starRatingBar.setMax(5);
         initiateSaveButton();
         initiateAddIngredientButton();
@@ -55,11 +54,14 @@ public class RecipeCreateActivity extends AppCompatActivity {
                     Step step = new Step(stepEditText.getText().toString(), stepCounter);
                     steps.add(step);
                     stepCounter++;
-                    updateIngredientListView();
+                    updateStepListView();
                 }
                 createToast("Please enter a step");
             }
         });
+    }
+
+    private void updateStepListView() {
     }
 
     private void updateIngredientListView() {
@@ -74,6 +76,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
                 if(ingredientEditText.getText() != null){
                     Ingredient ingredient = new Ingredient(ingredientEditText.getText().toString());
                     ingredients.add(ingredient);
+                    updateIngredientListView();
                 }
                 createToast("Please enter an ingredient");
             }
