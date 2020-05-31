@@ -34,9 +34,13 @@ public class RecipeCreateActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         starRatingBar.setMax(5);
-        
+        initiateSaveButton();
+
+
+    }
+
+    private void initiateSaveButton(){
         Button saveButton = findViewById(R.id.saveBtn);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -47,12 +51,10 @@ public class RecipeCreateActivity extends AppCompatActivity {
                 }
                 else{
                     createToast("Please enter a value in all fields");
-
                 }
             }
-            
-        });
 
+        });
     }
 
     private void showLayout(View layout) {
