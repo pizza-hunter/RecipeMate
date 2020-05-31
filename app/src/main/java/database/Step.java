@@ -6,13 +6,12 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Step {
 
-    @PrimaryKey()
-    private long stepID;
+    @PrimaryKey(autoGenerate = true) private long stepID;
     private String stepString;
     private int stepNumber;
     private long recipeStepID;
 
-    public Step(long stepID, String stepString, int stepNumber, long recipeStepID) {
+    public Step(String stepString, int stepNumber) {
         this.stepID = stepID;
         this.stepString = stepString;
         this.stepNumber = stepNumber;

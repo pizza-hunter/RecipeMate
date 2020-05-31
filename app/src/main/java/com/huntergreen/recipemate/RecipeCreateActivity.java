@@ -29,15 +29,32 @@ public class RecipeCreateActivity extends AppCompatActivity {
     //Steps section
     private List<Step> steps;
     private EditText stepEditText = findViewById(R.id.stepEditText);
+    private int stepCounter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        stepCounter = 0;
 
         starRatingBar.setMax(5);
         initiateSaveButton();
         initiateAddIngredientButton();
+        initiateAddStepButton();
 
+    }
+
+    private void initiateAddStepButton(){
+        Button addStepButton = findViewById(R.id.btnAddStep);
+        addStepButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(stepEditText.getText() != null){
+                    Step step = new Step(stepEditText.getText().toString(), stepCounter);
+                    steps.add(step);
+                    stepCounter++;
+                }
+            }
+        });
     }
 
     private void initiateAddIngredientButton(){
