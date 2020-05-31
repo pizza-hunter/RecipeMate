@@ -11,12 +11,12 @@
         android:id="@+id/logoImage"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@mipmap/ic_launcher_round"
-        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="86dp"
-        />
+        android:background="@mipmap/ic_launcher_round"
+        android:contentDescription="@string/logo_image_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/inputFormConstraintLayout"
@@ -64,21 +64,25 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:hint="@string/edit_new_recipe_prep_time"
+                android:inputType="text"
                 android:padding="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/recipeRatingTextView"
                 app:layout_constraintTop_toBottomOf="@+id/recipeCookingTimeEditText"
-                tools:layout_editor_absoluteX="16dp" />
+                tools:layout_editor_absoluteX="16dp"
+                android:importantForAutofill="no" />
 
             <EditText
                 android:id="@+id/recipeNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/edit_new_recipe_name"
-                android:padding="8dp"
                 android:layout_marginBottom="16dp"
+                android:hint="@string/edit_new_recipe_name"
+                android:inputType="text"
+                android:padding="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/recipeCookingTimeEditText"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="16dp" />
+                tools:layout_editor_absoluteX="16dp"
+                android:importantForAutofill="no" />
 
             <EditText
                 android:id="@+id/recipeCookingTimeEditText"
@@ -86,10 +90,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:hint="@string/edit_new_recipe_cooking_time"
+                android:inputType="text"
                 android:padding="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/recipePrepTimeEditText"
                 app:layout_constraintTop_toBottomOf="@+id/recipeNameEditText"
-                tools:layout_editor_absoluteX="16dp" />
+                tools:layout_editor_absoluteX="16dp"
+                android:importantForAutofill="no" />
 
             <RatingBar
                 android:id="@+id/recipeRatingBar"

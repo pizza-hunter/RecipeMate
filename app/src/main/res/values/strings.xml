@@ -6,4 +6,5 @@
     <string name="edit_new_recipe_prep_time">Please enter preparation time</string>
     <string name="txt_new_recipe_rating">Rate this recipe</string>
     <string name="btn_save">Save</string>
+    <string name="logo_image_description">Place logo of choice here</string>
 </resources>
