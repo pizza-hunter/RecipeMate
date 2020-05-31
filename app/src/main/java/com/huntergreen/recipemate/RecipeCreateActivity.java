@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RatingBar;
 
 import androidx.annotation.Nullable;
@@ -25,10 +26,12 @@ public class RecipeCreateActivity extends AppCompatActivity {
     //Ingredient section
     private List<Ingredient> ingredients;
     private EditText ingredientEditText = findViewById(R.id.ingredientNameEditText);
+    private ListView ingredientListView = findViewById(R.id.ingredientListView);
 
     //Steps section
     private List<Step> steps;
     private EditText stepEditText = findViewById(R.id.stepEditText);
+    private ListView stepListView = findViewById(R.id.stepListView);
     private int stepCounter;
 
     @Override
@@ -52,9 +55,15 @@ public class RecipeCreateActivity extends AppCompatActivity {
                     Step step = new Step(stepEditText.getText().toString(), stepCounter);
                     steps.add(step);
                     stepCounter++;
+                    updateIngredientListView();
                 }
+                createToast("Please enter a step");
             }
         });
+    }
+
+    private void updateIngredientListView() {
+
     }
 
     private void initiateAddIngredientButton(){
@@ -66,6 +75,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
                     Ingredient ingredient = new Ingredient(ingredientEditText.getText().toString());
                     ingredients.add(ingredient);
                 }
+                createToast("Please enter an ingredient");
             }
         });
     }
