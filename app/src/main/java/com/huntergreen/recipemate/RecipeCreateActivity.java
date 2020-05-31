@@ -2,8 +2,12 @@ package com.huntergreen.recipemate;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RatingBar;
 
@@ -62,10 +66,12 @@ public class RecipeCreateActivity extends AppCompatActivity {
     }
 
     private void updateStepListView() {
+
     }
 
     private void updateIngredientListView() {
-
+        ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,ingredientStrings);
+        ingredientListView.setAdapter(adapter);
     }
 
     private void initiateAddIngredientButton(){
