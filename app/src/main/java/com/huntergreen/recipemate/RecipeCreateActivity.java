@@ -36,13 +36,25 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
         starRatingBar.setMax(5);
         initiateSaveButton();
+        initiateAddIngredientButton();
 
+    }
 
+    private void initiateAddIngredientButton(){
+        Button addIngredientButton = findViewById(R.id.btnAddIngredient);
+        addIngredientButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(ingredientEditText.getText() != null){
+                    Ingredient ingredient = new Ingredient(ingredientEditText.getText().toString());
+                    ingredients.add(ingredient);
+                }
+            }
+        });
     }
 
     private void initiateSaveButton(){
         Button saveButton = findViewById(R.id.saveBtn);
-
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

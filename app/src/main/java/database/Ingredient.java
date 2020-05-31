@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Ingredient {
     @PrimaryKey(autoGenerate = true) private int id;
-
     private String identifier;
     private long recipeIngredientID;
 
