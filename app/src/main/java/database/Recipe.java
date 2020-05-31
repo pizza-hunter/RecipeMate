@@ -10,16 +10,12 @@ public class Recipe {
     @PrimaryKey
     private long recipeId;
     private String name;
-    private String cookingTime;
-    private String prepTime;
     private double rating;
 
 
-    public Recipe(long recipeId,String name, String cookingTime, String prepTime, double rating) {
+    public Recipe(long recipeId,String name, double rating) {
         this.recipeId = recipeId;
         this.name = name;
-        this.cookingTime = cookingTime;
-        this.prepTime = prepTime;
         this.rating = rating;
     }
 
@@ -31,14 +27,6 @@ public class Recipe {
 
     public long getRecipeId() {
         return recipeId;
-    }
-
-    public String getCookingTime() {
-        return cookingTime;
-    }
-
-    public String getPrepTime() {
-        return prepTime;
     }
 
     public double getRating() {
