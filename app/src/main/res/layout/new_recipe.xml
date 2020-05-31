@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_add"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/stepInformationEditText"
+        app:layout_constraintTop_toTopOf="@id/stepEditText"
 
         />
     <Button
@@ -57,17 +57,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/input_form_element_background"
         android:hint="@string/edit_new_ingredient"
         android:padding="8dp"
+        android:inputType="text"
         app:layout_constraintEnd_toStartOf="@id/btnAddIngredient"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingredientTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/ingredientTextView"
+        android:importantForAutofill="no" />
 
     <EditText
-        android:id="@+id/stepInformationEditText"
+        android:id="@+id/stepEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -76,9 +78,11 @@
         android:background="@drawable/input_form_element_background"
         android:hint="@string/edit_new_step"
         android:padding="8dp"
+        android:inputType="textMultiLine"
         app:layout_constraintEnd_toStartOf="@+id/btnAddStep"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/stepTextView" />
+        app:layout_constraintTop_toBottomOf="@id/stepTextView"
+        android:importantForAutofill="no"/>
 
     <ListView
         android:id="@+id/ingredientListView"
@@ -103,9 +107,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@color/colorPrimaryDark"
-        app:layout_constraintTop_toBottomOf="@id/stepInformationEditText"
+        app:layout_constraintTop_toBottomOf="@id/stepEditText"
 
-        ></ListView>
+        />
 
     <RatingBar
         android:id="@+id/recipeRatingBar"
@@ -157,14 +161,15 @@
         app:layout_constraintTop_toBottomOf="@id/ingredientListView"
         android:background="@drawable/input_form_element_background"
         android:padding="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginStart="8dp"
         />
 
     <TextView
         android:id="@+id/recipeRatingTextView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/input_form_element_background"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:padding="8dp"
