@@ -42,7 +42,6 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
     /*
         Issues
-        I & S inputs accept null values - changed comparison to length
         Edit texts dont delete values after pressing add
         List views are too small
         List items are too wide.
@@ -77,7 +76,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
         addStepButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(stepEditText.getText() != null){
+                if(stepEditText.getText().length() > 0){
                     Step step = new Step(stepEditText.getText().toString(), stepCounter);
                     steps.add(step);
                     stepStrings.add(step.getStep());
@@ -104,7 +103,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
         addIngredientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ingredientEditText.getText() != null){
+                if(ingredientEditText.getText().length() > 0){
                     Ingredient ingredient = new Ingredient(ingredientEditText.getText().toString());
                     ingredients.add(ingredient);
                     ingredientStrings.add(ingredient.getIdentifier());
