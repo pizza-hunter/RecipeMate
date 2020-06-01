@@ -42,7 +42,6 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
     /*
         Issues
-        Edit texts dont delete values after pressing add
         List views are too small
         List items are too wide.
      */
@@ -82,6 +81,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
                     stepStrings.add(step.getStep());
                     stepCounter++;
                     updateStepListView();
+                    stepEditText.setText("");
                 }
                 createToast("Please enter a step");
             }
@@ -108,6 +108,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
                     ingredients.add(ingredient);
                     ingredientStrings.add(ingredient.getIdentifier());
                     updateIngredientListView();
+                    ingredientEditText.setText("");
                 }
                 createToast("Please enter an ingredient");
             }
