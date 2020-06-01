@@ -20,27 +20,25 @@ import database.RecipeDB;
 
 public class MainActivity extends AppCompatActivity {
 
-    RecipeDB db = Room.databaseBuilder(getApplicationContext(),
-            RecipeDB.class, "RecipeDatabase").build();
+    //RecipeDB db = Room.databaseBuilder(getApplicationContext(),
+           // RecipeDB.class, "RecipeDatabase").build();
 
-    private Button newRecipeButton = findViewById(R.id.btnNewRecipe);
-    private Intent intent = new Intent(this, RecipeCreateActivity.class);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initiateNewRecipeButton();
-
-
-
     }
 
     private void initiateNewRecipeButton() {
+        Button newRecipeButton = findViewById(R.id.btnNewRecipe);
+        final Intent intent = new Intent(this, RecipeCreateActivity.class);
         newRecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(intent);
+                startActivity(new Intent(intent));
             }
         });
     }
