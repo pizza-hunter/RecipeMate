@@ -25,26 +25,41 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
     //Recipe section
     private Recipe recipe;
-    private RatingBar starRatingBar = findViewById(R.id.recipeRatingBar);
-    private EditText recipeNameEditText = findViewById(R.id.recipeNameEditText);
+    private RatingBar starRatingBar;
+    private EditText recipeNameEditText;
 
     //Ingredient section
     private List<Ingredient> ingredients;
     private ArrayList<String> ingredientStrings;
-    private EditText ingredientEditText = findViewById(R.id.ingredientNameEditText);
-    private ListView ingredientListView = findViewById(R.id.ingredientListView);
+    private EditText ingredientEditText;
+    private ListView ingredientListView;
 
     //Steps section
     private List<Step> steps;
     private ArrayList<String> stepStrings;
-    private EditText stepEditText = findViewById(R.id.stepEditText);
-    private ListView stepListView = findViewById(R.id.stepListView);
+    private EditText stepEditText;
+    private ListView stepListView;
     private int stepCounter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.new_recipe);
+
+        starRatingBar = findViewById(R.id.recipeRatingBar);
+        recipeNameEditText = findViewById(R.id.recipeNameEditText);
+
+        ingredients = new ArrayList<Ingredient>();
+        ingredientStrings = new ArrayList<String>();
+        ingredientEditText = findViewById(R.id.ingredientNameEditText);
+        ingredientListView = findViewById(R.id.ingredientListView);
+
+        steps = new ArrayList<Step>();
+        stepStrings = new ArrayList<String>();
+        stepEditText = findViewById(R.id.stepEditText);
+        stepListView = findViewById(R.id.stepListView);
         stepCounter = 0;
+
         starRatingBar.setMax(5);
         initiateSaveButton();
         initiateAddIngredientButton();
