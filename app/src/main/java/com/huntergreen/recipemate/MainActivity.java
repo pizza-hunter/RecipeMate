@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 
 import database.RecipeDB;
 
@@ -21,13 +22,25 @@ public class MainActivity extends AppCompatActivity {
     RecipeDB db = Room.databaseBuilder(getApplicationContext(),
             RecipeDB.class, "RecipeDatabase").build();
 
+    private Button newRecipeButton = findViewById(R.id.btnNewRecipe);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initiateNewRecipeButton();
 
 
+
+    }
+
+    private void initiateNewRecipeButton() {
+        newRecipeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setContentView(R.layout.new_recipe);
+            }
+        });
     }
 
 
