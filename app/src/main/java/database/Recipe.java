@@ -7,14 +7,12 @@ import java.util.ArrayList;
 
 @Entity
 public class Recipe {
-    @PrimaryKey
-    private long recipeId;
+    @PrimaryKey(autoGenerate = true) private long recipeId;
     private String name;
     private double rating;
 
 
-    public Recipe(long recipeId,String name, double rating) {
-        this.recipeId = recipeId;
+    public Recipe(String name, double rating) {
         this.name = name;
         this.rating = rating;
     }
