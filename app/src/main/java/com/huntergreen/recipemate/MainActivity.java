@@ -3,6 +3,7 @@ package com.huntergreen.recipemate;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
             RecipeDB.class, "RecipeDatabase").build();
 
     private Button newRecipeButton = findViewById(R.id.btnNewRecipe);
+    private Intent intent = new Intent(this, RecipeCreateActivity.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         newRecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setContentView(R.layout.new_recipe);
+                startActivity(intent);
             }
         });
     }
