@@ -87,7 +87,7 @@
     <ListView
         android:id="@+id/ingredientListView"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="110dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -99,7 +99,7 @@
     <ListView
         android:id="@+id/stepListView"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="110dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -122,7 +122,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/input_form_element_background"
         android:padding="8dp"
         android:text="@string/txt_ingredient_title"
@@ -140,7 +140,7 @@
         app:layout_constraintTop_toBottomOf="@id/ingredientListView"
         android:background="@drawable/input_form_element_background"
         android:padding="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
         />
 
