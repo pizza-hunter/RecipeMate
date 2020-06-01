@@ -55,8 +55,8 @@ public class ExampleUnitTest {
     public void writeRecipeAndReadInList() throws Exception{
         Recipe bakedPotato = new Recipe(1,"Baked Potato",5);
         Ingredient potato = new Ingredient("potato");
-        Step s1 = new Step(1,"Wrap potato in alfoil then place in oven at 180 degrees C for 1 hour",1,1);
-        Step s2 = new Step(2,"Let potato rest for 10 minutes and then enjoy!",2,1);
+        Step s1 = new Step("Wrap potato in alfoil then place in oven at 180 degrees C for 1 hour",1);
+        Step s2 = new Step("Let potato rest for 10 minutes and then enjoy!",2);
 
 
         recipeDao.insertRecipe(bakedPotato);
