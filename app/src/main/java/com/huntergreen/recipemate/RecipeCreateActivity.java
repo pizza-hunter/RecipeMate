@@ -3,6 +3,7 @@ package com.huntergreen.recipemate;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -43,7 +44,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
     /*
         Issues
         List views are too small
-        List items are too wide.
+        List items are too tall.
      */
 
     @Override
@@ -82,10 +83,25 @@ public class RecipeCreateActivity extends AppCompatActivity {
                     stepCounter++;
                     updateStepListView();
                     stepEditText.setText("");
+                    try {
+                        hideKeyboard();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 createToast("Please enter a step");
             }
         });
+    }
+
+    //Method for hiding keyboard from https://stackoverflow.com/questions/13593069/androidhide-keyboard-after-button-click/13593232
+    private void hideKeyboard() throws Exception{
+        try {
+            InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        } catch (Exception e){
+            System.out.println("Keyboard not active");
+        }
     }
 
     private void updateStepListView() {
