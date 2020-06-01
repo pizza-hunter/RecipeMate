@@ -87,22 +87,19 @@
     <ListView
         android:id="@+id/ingredientListView"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-
         android:background="@color/colorPrimaryDark"
         app:layout_constraintTop_toBottomOf="@id/ingredientNameEditText"
 
         >
-
     </ListView>
-
     <ListView
         android:id="@+id/stepListView"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -110,24 +107,6 @@
         app:layout_constraintTop_toBottomOf="@id/stepEditText"
 
         />
-
-    <RatingBar
-        android:id="@+id/recipeRatingBar"
-        style="?android:attr/ratingBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:isIndicator="false"
-        android:numStars="5"
-        android:rating="5"
-        android:stepSize="0.1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recipeRatingTextView">
-
-
-    </RatingBar>
 
     <TextView
         android:id="@+id/recipeTitleTextView"
@@ -164,19 +143,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="8dp"
         />
-
-    <TextView
-        android:id="@+id/recipeRatingTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/input_form_element_background"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:padding="8dp"
-        android:text="@string/txt_new_recipe_rating"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stepListView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
