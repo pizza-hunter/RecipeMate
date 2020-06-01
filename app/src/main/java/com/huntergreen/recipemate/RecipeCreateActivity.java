@@ -40,6 +40,14 @@ public class RecipeCreateActivity extends AppCompatActivity {
     private ListView stepListView;
     private int stepCounter;
 
+    /*
+        Issues
+        I & S inputs accept null values - changed comparison to length
+        Edit texts dont delete values after pressing add
+        List views are too small
+        List items are too wide.
+     */
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
