@@ -25,7 +25,6 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
     //Recipe section
     private Recipe recipe;
-    private RatingBar starRatingBar;
     private EditText recipeNameEditText;
 
     //Ingredient section
@@ -46,7 +45,6 @@ public class RecipeCreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_recipe);
 
-        starRatingBar = findViewById(R.id.recipeRatingBar);
         recipeNameEditText = findViewById(R.id.recipeNameEditText);
 
         ingredients = new ArrayList<Ingredient>();
@@ -60,7 +58,6 @@ public class RecipeCreateActivity extends AppCompatActivity {
         stepListView = findViewById(R.id.stepListView);
         stepCounter = 0;
 
-        starRatingBar.setMax(5);
         initiateSaveButton();
         initiateAddIngredientButton();
         initiateAddStepButton();
@@ -138,8 +135,8 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
 
     private void createRecipe() {
-        //todo: change recipeID from harccoded
-        this.recipe = new Recipe(1, this.recipeNameEditText.getText().toString(), this.starRatingBar.getNumStars());
+        //todo: change recipeID & rating from hardcoded values
+        this.recipe = new Recipe(1, this.recipeNameEditText.getText().toString(),5);
     }
 
 
