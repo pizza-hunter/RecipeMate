@@ -20,8 +20,8 @@ import database.RecipeDB;
 
 public class MainActivity extends AppCompatActivity {
 
-    //RecipeDB db = Room.databaseBuilder(getApplicationContext(),
-           // RecipeDB.class, "RecipeDatabase").build();
+//    RecipeDB db = Room.databaseBuilder(getApplicationContext(),
+//            RecipeDB.class, "RecipeDatabase").build();
 
 
 

@@ -2,15 +2,12 @@ package com.huntergreen.recipemate;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.RatingBar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +20,7 @@ import database.Recipe;
 import database.Step;
 
 public class RecipeCreateActivity extends AppCompatActivity {
+
 
     //Recipe section
     private Recipe recipe;
@@ -43,7 +41,6 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
     /*
         Issues
-        List views are too small
         List items are too tall.
      */
 
@@ -159,9 +156,11 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
 
     private void createRecipe() {
-        //todo: change recipeID & rating from hardcoded values
-        this.recipe = new Recipe(1, this.recipeNameEditText.getText().toString(),5);
+        //todo: change rating from hardcoded values
+        this.recipe = new Recipe(this.recipeNameEditText.getText().toString(),0);
     }
+
+
 
 
 
