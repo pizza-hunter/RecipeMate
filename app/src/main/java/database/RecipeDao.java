@@ -27,7 +27,7 @@ public interface RecipeDao {
     @Query("SELECT * FROM recipe")
     List<Recipe> getAllRecipes();
 
-    @Query("SELECT * FROM recipe WHERE name LIKE :searchName")
+    @Query("SELECT * FROM recipe WHERE recipe_name LIKE :searchName")
     Recipe findRecipeByName(String searchName);
 
     @Transaction
@@ -40,15 +40,15 @@ public interface RecipeDao {
 
     @Transaction
     @Query("SELECT * FROM Ingredient " +
-            "INNER JOIN Recipe ON Recipe.recipeId = recipeIngredientID " +
-            "WHERE recipeId = :clickedRecipeID"
+            "INNER JOIN Recipe ON Recipe.recipe_id = recipe_ingredient_id " +
+            "WHERE recipe_id = :clickedRecipeID"
     )
     List<Ingredient> getRecipeIngredients(long clickedRecipeID);
 
     @Transaction
     @Query("SELECT * FROM Step " +
-            "INNER JOIN Recipe ON Recipe.recipeId = recipeStepID " +
-            "WHERE recipeId = :clickedRecipeID"
+            "INNER JOIN Recipe ON Recipe.recipe_id = recipe_step_id " +
+            "WHERE recipe_id = :clickedRecipeID"
     )
     List<Step> getRecipeSteps(long clickedRecipeID);
 
