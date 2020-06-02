@@ -1,25 +1,36 @@
 package database;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
 public class Step {
 
-    @PrimaryKey(autoGenerate = true) private long stepID;
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "step_id")
+    private long stepID;
+
+    @ColumnInfo(name = "step_string")
     private String stepString;
+
+    @ColumnInfo(name = "step_number")
     private int stepNumber;
+
+    @ColumnInfo(name = "recipe_step_id")
     private long recipeStepID;
 
     public Step(String stepString, int stepNumber) {
-        this.stepID = stepID;
         this.stepString = stepString;
         this.stepNumber = stepNumber;
-        this.recipeStepID = recipeStepID;
     }
 
     public void setStepID(long stepID) {
         this.stepID = stepID;
+    }
+
+    public long getStepID() {
+        return stepID;
     }
 
     public String getStepString() {
@@ -34,23 +45,14 @@ public class Step {
         this.stepNumber = stepNumber;
     }
 
+    public int getStepNumber() {
+        return stepNumber;
+    }
+
     public void setRecipeStepID(long recipeStepID) {
         this.recipeStepID = recipeStepID;
     }
 
-    public long getStepID() {
-        return stepID;
-    }
-
-    public void setStep(String stepString) {
-        this.stepString = stepString;
-    }
-
-    public String getStep() { return stepString; }
-
     public long getRecipeStepID() { return recipeStepID; }
 
-    public int getStepNumber() {
-        return stepNumber;
-    }
 }
