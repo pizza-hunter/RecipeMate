@@ -1,12 +1,20 @@
 package database;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
 public class Ingredient {
-    @PrimaryKey(autoGenerate = true) private int id;
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "ingredient_id")
+    private int id;
+
+    @ColumnInfo(name = "ingredient_identifier")
     private String identifier;
+
+    @ColumnInfo(name = "recipe_ingredient_id")
     private long recipeIngredientID;
 
 
