@@ -1,5 +1,6 @@
 package database;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -7,8 +8,15 @@ import java.util.ArrayList;
 
 @Entity
 public class Recipe {
-    @PrimaryKey(autoGenerate = true) private long recipeId;
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "recipe_id")
+    private long recipeId;
+
+    @ColumnInfo(name = "recipe_name")
     private String name;
+
+    @ColumnInfo(name = "recipe_rating")
     private double rating;
 
 
