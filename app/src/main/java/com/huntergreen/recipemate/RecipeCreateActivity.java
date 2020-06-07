@@ -18,6 +18,7 @@ import java.util.List;
 
 import database.Ingredient;
 import database.Recipe;
+import database.RecipeDB;
 import database.Step;
 
 public class RecipeCreateActivity extends AppCompatActivity {
@@ -154,6 +155,33 @@ public class RecipeCreateActivity extends AppCompatActivity {
                 steps.size() > 0;
     }
 
+    private void createSteps(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (Step step: steps
+                     ) {
+                    step.setRecipeStepID(recipe.getRecipeId());
+                    RecipeDB.getInstance(getApplicationContext()).recipeDao().insertStep(step);
+                    Log.d("Tag",recipe.getName()+"Recipe added to database");
+                }
+            }
+        });
+    }
+
+    private void createIngredients(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (Ingredient ingredient: ingredients
+                     ) {
+                    ingredient.setRecipeIngredientID(recipe.getRecipeId());
+                    RecipeDB.getInstance(getApplicationContext()).recipeDao().insertIngredient(ingredient);
+                    Log.d("Tag",recipe.getName()+"Recipe added to database");
+                }
+            }
+        });
+    }
 
     private void createRecipe() {
         this.recipe = new Recipe(this.recipeNameEditText.getText().toString(),0);
