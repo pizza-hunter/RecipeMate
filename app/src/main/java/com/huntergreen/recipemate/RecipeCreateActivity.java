@@ -1,6 +1,7 @@
 package com.huntergreen.recipemate;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -155,8 +156,14 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
 
     private void createRecipe() {
-        //todo: change rating from hardcoded values
         this.recipe = new Recipe(this.recipeNameEditText.getText().toString(),0);
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                RecipeDB.getInstance(getApplicationContext()).recipeDao().insertRecipe(recipe);
+                Log.d("Tag",recipe.getName()+"Recipe added to database");
+            }
+        });
     }
 
 
