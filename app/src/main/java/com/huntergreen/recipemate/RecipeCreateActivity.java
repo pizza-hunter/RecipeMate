@@ -41,6 +41,24 @@ public class RecipeCreateActivity extends AppCompatActivity {
     private ListView stepListView;
     private int stepCounter;
 
+
+    //TODO: remove getter methods for lists after testing
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public ArrayList<String> getIngredientStrings() {
+        return ingredientStrings;
+    }
+
+    public List<Step> getSteps() {
+        return steps;
+    }
+
+    public ArrayList<String> getStepStrings() {
+        return stepStrings;
+    }
+
     /*
         Issues
         List items are too tall.
