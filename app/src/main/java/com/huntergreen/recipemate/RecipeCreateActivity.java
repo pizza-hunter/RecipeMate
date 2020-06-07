@@ -144,6 +144,8 @@ public class RecipeCreateActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(recipeHasIngredientsAndSteps()) {
                     createRecipe();
+                    createIngredients();
+                    createSteps();
                 }
                 else{
 
