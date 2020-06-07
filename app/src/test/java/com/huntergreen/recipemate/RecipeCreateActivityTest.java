@@ -34,6 +34,13 @@ public class RecipeCreateActivityTest {
     private EditText ingredientEditText;
     private EditText stepEditText;
 
+    private String recipeName;
+    private String ingredientNameEggs;
+    private String ingredientNameMilk;
+    private String step1Name;
+    private String step2Name;
+
+
     @Before
     public void setUp() throws Exception {
         Context context = ApplicationProvider.getApplicationContext();
@@ -44,6 +51,13 @@ public class RecipeCreateActivityTest {
         recipeEditText = rca.findViewById(R.id.recipeNameEditText);
         ingredientEditText = rca.findViewById(R.id.ingredientNameEditText);
         stepEditText = rca.findViewById(R.id.stepEditText);
+
+        recipeName = "Scrambled eggs";
+        ingredientNameEggs = "2 large Eggs";
+        ingredientNameMilk = "A dash of whole milk";
+        step1Name = "Whisk eggs in small mixing bowl";
+        step2Name = "Place skillet over medium heat, add eggs to skillet and stir until fluffy";
+
     }
 
     @After
@@ -53,11 +67,6 @@ public class RecipeCreateActivityTest {
 
     @Test
     public void InputEditTextTest(){
-        String recipeName = "Scrambled eggs";
-        String ingredientNameEggs = "2 large Eggs";
-        String ingredientNameMilk = "A dash of whole milk";
-        String step1Name = "Whisk eggs in small mixing bowl";
-        String step2Name = "Place skillet over medium heat, add eggs to skillet and stir until fluffy";
 
         recipeEditText.setText(recipeName);
         assertEquals(recipeName, recipeEditText.getText().toString());
