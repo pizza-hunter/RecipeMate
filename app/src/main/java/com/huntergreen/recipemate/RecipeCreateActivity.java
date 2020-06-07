@@ -87,7 +87,11 @@ public class RecipeCreateActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-                createToast("Please enter a step");
+                try {
+                    createToast("Please enter a step");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -124,7 +128,11 @@ public class RecipeCreateActivity extends AppCompatActivity {
                     updateIngredientListView();
                     ingredientEditText.setText("");
                 }
-                createToast("Please enter an ingredient");
+                try {
+                    createToast("Please enter an ingredient");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -138,15 +146,21 @@ public class RecipeCreateActivity extends AppCompatActivity {
                     createRecipe();
                 }
                 else{
-                    createToast("Please enter a value in all fields");
+
+                    try {
+                        createToast("Please enter a value in all fields");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
         });
     }
 
-    private void createToast(String message) {
+    private void createToast(String message) throws Exception {
         //todo:empty method
+        throw new Exception("message");
     }
 
     private boolean recipeHasIngredientsAndSteps() {
