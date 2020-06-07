@@ -74,9 +74,8 @@ public class RecipeCreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(stepEditText.getText().length() > 0){
-                    Step step = new Step(stepEditText.getText().toString(), stepCounter);
-                    steps.add(step);
-                    stepStrings.add(step.getStep());
+                    steps.add(new Step(stepEditText.getText().toString(), stepCounter));
+                    stepStrings.add(steps.get(stepCounter).getStepString());
                     stepCounter++;
                     updateStepListView();
                     stepEditText.setText("");
