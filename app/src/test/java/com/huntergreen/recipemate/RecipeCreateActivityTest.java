@@ -41,6 +41,9 @@ public class RecipeCreateActivityTest {
     private String step1Name;
     private String step2Name;
 
+    private Button btnIngredient;
+    private Button btnStep;
+
 
     @Before
     public void setUp() throws Exception {
@@ -59,6 +62,8 @@ public class RecipeCreateActivityTest {
         step1Name = "Whisk eggs in small mixing bowl";
         step2Name = "Place skillet over medium heat, add eggs to skillet and stir until fluffy";
 
+        btnIngredient = rca.findViewById(R.id.btnAddIngredient);
+        btnStep = rca.findViewById(R.id.btnAddStep);
     }
 
     @After
