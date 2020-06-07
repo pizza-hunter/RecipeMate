@@ -88,6 +88,14 @@ public class RecipeCreateActivityTest {
         ingredientEditText.setText(ingredientNameEggs);
         stepEditText.setText(step1Name);
 
+        //Test if button click empties editTexts
+        btnIngredient.performClick();
+        assertEquals("",ingredientEditText.getText().toString());
+        btnStep.performClick();
+        assertEquals("",stepEditText.getText().toString());
+
+
+
     }
 
     /*
