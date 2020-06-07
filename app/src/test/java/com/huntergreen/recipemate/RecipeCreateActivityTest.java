@@ -39,6 +39,8 @@ public class RecipeCreateActivityTest {
         rca = Robolectric.buildActivity(RecipeCreateActivity.class).create().get();
 
         recipeEditText = rca.findViewById(R.id.recipeNameEditText);
+        ingredientEditText = rca.findViewById(R.id.ingredientNameEditText);
+        stepEditText = rca.findViewById(R.id.stepEditText);
     }
 
     @After
@@ -46,7 +48,10 @@ public class RecipeCreateActivityTest {
         db.close();
     }
 
+    @Test
+    public void InputEditTextTest(){
 
+    }
 
     /*
         Tests
