@@ -18,6 +18,9 @@ import org.robolectric.annotation.Config;
 import database.RecipeDB;
 import database.RecipeDao;
 
+import static org.junit.Assert.*;
+
+
 @RunWith(RobolectricTestRunner.class)
 @Config(sdk = Build.VERSION_CODES.O_MR1)
 public class RecipeCreateActivityTest {
@@ -50,6 +53,15 @@ public class RecipeCreateActivityTest {
 
     @Test
     public void InputEditTextTest(){
+        String recipeName = "Scrambled eggs";
+        String ingredientNameEggs = "2 large Eggs";
+        String ingredientNameMilk = "A dash of whole milk";
+        String step1Name = "Whisk eggs in small mixing bowl";
+        String step2Name = "Place skillet over medium heat, add eggs to skillet and stir until fluffy";
+
+
+
+
 
     }
 
