@@ -93,6 +93,10 @@ public class RecipeCreateActivityTest {
         assertEquals("",ingredientEditText.getText().toString());
         btnStep.performClick();
         assertEquals("",stepEditText.getText().toString());
+    }
+
+    @Test
+    public void addButtonsUpdateListsTest(){
 
     }
 
