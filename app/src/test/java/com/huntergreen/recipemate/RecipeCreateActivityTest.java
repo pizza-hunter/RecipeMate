@@ -67,14 +67,12 @@ public class RecipeCreateActivityTest {
 
     @Test
     public void InputEditTextTest(){
-
         recipeEditText.setText(recipeName);
-        assertEquals(recipeName, recipeEditText.getText().toString());
-
         ingredientEditText.setText(ingredientNameEggs);
-        assertEquals(ingredientNameEggs, ingredientEditText.getText().toString());
-
         stepEditText.setText(step1Name);
+
+        assertEquals(recipeName, recipeEditText.getText().toString());
+        assertEquals(ingredientNameEggs, ingredientEditText.getText().toString());
         assertEquals(step1Name,stepEditText.getText().toString());
     }
 
