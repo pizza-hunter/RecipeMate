@@ -29,13 +29,13 @@ public class RecipeCreateActivity extends AppCompatActivity {
     private EditText recipeNameEditText;
 
     //Ingredient section
-    private List<Ingredient> ingredients;
+    private ArrayList<Ingredient> ingredients;
     private ArrayList<String> ingredientStrings;
     private EditText ingredientEditText;
     private ListView ingredientListView;
 
     //Steps section
-    private List<Step> steps;
+    private ArrayList<Step> steps;
     private ArrayList<String> stepStrings;
     private EditText stepEditText;
     private ListView stepListView;
@@ -43,7 +43,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
 
     //TODO: remove getter methods for lists after testing
-    public List<Ingredient> getIngredients() {
+    public ArrayList<Ingredient> getIngredients() {
         return ingredients;
     }
 
@@ -51,7 +51,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
         return ingredientStrings;
     }
 
-    public List<Step> getSteps() {
+    public ArrayList<Step> getSteps() {
         return steps;
     }
 
