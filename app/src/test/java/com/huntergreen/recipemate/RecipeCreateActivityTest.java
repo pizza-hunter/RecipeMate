@@ -59,10 +59,14 @@ public class RecipeCreateActivityTest {
         String step1Name = "Whisk eggs in small mixing bowl";
         String step2Name = "Place skillet over medium heat, add eggs to skillet and stir until fluffy";
 
+        recipeEditText.setText(recipeName);
+        assertEquals(recipeName, recipeEditText.getText().toString());
 
+        ingredientEditText.setText(ingredientNameEggs);
+        assertEquals(ingredientNameEggs, ingredientEditText.getText().toString());
 
-
-
+        stepEditText.setText(step1Name);
+        assertEquals(step1Name,stepEditText.getText().toString());
     }
 
     /*
