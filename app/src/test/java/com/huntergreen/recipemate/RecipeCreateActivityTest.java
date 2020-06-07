@@ -2,6 +2,7 @@ package com.huntergreen.recipemate;
 
 import android.content.Context;
 import android.os.Build;
+import android.widget.EditText;
 
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
@@ -10,6 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
@@ -23,11 +25,20 @@ public class RecipeCreateActivityTest {
     private RecipeDao recipeDao;
     private RecipeDB db;
 
+    private RecipeCreateActivity rca;
+
+    private EditText recipeEditText;
+    private EditText ingredientEditText;
+    private EditText stepEditText;
+
     @Before
     public void setUp() throws Exception {
         Context context = ApplicationProvider.getApplicationContext();
         db = Room.databaseBuilder(context, RecipeDB.class,"RecipeDB").allowMainThreadQueries().build();
         recipeDao = db.recipeDao();
+        rca = Robolectric.buildActivity(RecipeCreateActivity.class).create().get();
+
+        recipeEditText = rca.findViewById(R.id.recipeNameEditText);
     }
 
     @After
