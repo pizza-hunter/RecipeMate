@@ -25,6 +25,14 @@ public class Recipe {
         this.rating = rating;
     }
 
+    public void setRecipeId(long recipeId) {
+        this.recipeId = recipeId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void setRating(double rating) {
         this.rating = rating;
     }
