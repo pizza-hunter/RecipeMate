@@ -17,7 +17,7 @@ public abstract class RecipeDB extends RoomDatabase {
         Method derived from : https://www.youtube.com/watch?v=WquAAoBFBPU&ab_channel=yoursTRULY
         Double null check is used to ensure multiple singletons are not initialised on multiple threads
      */
-    static RecipeDB getInstance(Context context){
+    public static RecipeDB getInstance(Context context){
         if(INSTANCE == null){
             synchronized (RecipeDB.class){
                 if(INSTANCE == null){
