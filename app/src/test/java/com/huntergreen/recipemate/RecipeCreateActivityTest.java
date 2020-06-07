@@ -37,6 +37,22 @@ public class RecipeCreateActivityTest {
 
 
 
+    /*
+        Tests
+        Input tests (allow inputs)
+            Recipe name
+            Ingredient name
+            step name
+        Add Button tests (buttons cause item to be added to list)
+            test corresponding input fields are empty after pressing
+        Listview tests
+            value entered in input appears as list item
+        Save button test
+            Items are added to db.
+     */
+
+
+
 
 
 }
