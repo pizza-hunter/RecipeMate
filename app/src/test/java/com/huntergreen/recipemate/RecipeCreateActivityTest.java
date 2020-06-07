@@ -84,7 +84,6 @@ public class RecipeCreateActivityTest {
 
     @Test
     public void addButtonsEmptyEditTextTest(){
-        recipeEditText.setText(recipeName);
         ingredientEditText.setText(ingredientNameEggs);
         stepEditText.setText(step1Name);
 
@@ -97,7 +96,13 @@ public class RecipeCreateActivityTest {
 
     @Test
     public void addButtonsUpdateListsTest(){
+        ingredientEditText.setText(ingredientNameEggs);
+        stepEditText.setText(step1Name);
+        btnIngredient.performClick();
+        btnStep.performClick();
 
+        assertEquals(ingredientNameEggs,rca.getIngredients().get(0).getIdentifier());
+        assertEquals(step1Name,rca.getSteps().get(0).getStepString());
     }
 
     /*
