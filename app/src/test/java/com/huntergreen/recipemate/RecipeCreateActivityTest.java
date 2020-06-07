@@ -2,6 +2,7 @@ package com.huntergreen.recipemate;
 
 import android.content.Context;
 import android.os.Build;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.room.Room;
@@ -74,6 +75,14 @@ public class RecipeCreateActivityTest {
         assertEquals(recipeName, recipeEditText.getText().toString());
         assertEquals(ingredientNameEggs, ingredientEditText.getText().toString());
         assertEquals(step1Name,stepEditText.getText().toString());
+    }
+
+    @Test
+    public void addButtonsTest(){
+        recipeEditText.setText(recipeName);
+        ingredientEditText.setText(ingredientNameEggs);
+        stepEditText.setText(step1Name);
+
     }
 
     /*
