@@ -114,12 +114,12 @@ public class RecipeCreateActivityTest {
                 }
             }
         });
-
-
-
-
     }
 
+    @Test
+    public void listItemAppearsInListViewTest(){
+
+    }
     /*
         Tests
         Input tests (allow inputs)
