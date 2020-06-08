@@ -1,7 +1,9 @@
 package com.huntergreen.recipemate;
 
+import android.app.LauncherActivity;
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -138,9 +140,31 @@ public class RecipeCreateActivityTest {
                 stepEditText.setText(step1Name);
                 try {
                     wait(1000);
+                    btnIngredient.performClick();
+                    btnStep.performClick();
+                    wait(1000);
+                    Object itemIngredient = listViewIngredients.getItemAtPosition(0);
+                    Object itemStep = listViewSteps.getItemAtPosition(0);
+                    assertEquals(ingredientNameEggs,itemIngredient.toString());
+                    assertEquals(step1Name, itemStep.toString());
                 } catch (InterruptedException e) { e.printStackTrace(); }
-                btnIngredient.performClick();
-                btnStep.performClick();
+
+                //Input of second ingredient and step
+
+                ingredientEditText.setText(ingredientNameMilk);
+                stepEditText.setText(step2Name);
+                try {
+                    wait(1000);
+                    btnIngredient.performClick();
+                    btnStep.performClick();
+                    wait(1000);
+                    Object itemIngredient = listViewIngredients.getItemAtPosition(1);
+                    Object itemStep = listViewSteps.getItemAtPosition(1);
+                    assertEquals(ingredientNameMilk,itemIngredient.toString());
+                    assertEquals(step2Name, itemStep.toString());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
             }
         });
