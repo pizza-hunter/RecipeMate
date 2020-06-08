@@ -45,6 +45,8 @@ public class RecipeCreateActivityTest {
     private Button btnIngredient;
     private Button btnStep;
 
+    private ListView listViewIngredients;
+    private ListView listViewSteps;
 
     @Before
     public void setUp() throws Exception {
@@ -65,6 +67,9 @@ public class RecipeCreateActivityTest {
 
         btnIngredient = rca.findViewById(R.id.btnAddIngredient);
         btnStep = rca.findViewById(R.id.btnAddStep);
+
+        listViewIngredients = rca.findViewById(R.id.ingredientListView);
+        listViewSteps = rca.findViewById(R.id.stepListView);
     }
 
     @After
