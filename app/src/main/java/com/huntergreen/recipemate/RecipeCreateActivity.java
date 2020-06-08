@@ -83,36 +83,9 @@ public class RecipeCreateActivity extends AppCompatActivity {
         stepCounter = 0;
 
         initiateSaveButton();
-        initiateAddIngredientButton();
-        initiateAddStepButton();
 
     }
 
-    private void initiateAddStepButton(){
-        Button addStepButton = findViewById(R.id.btnAddStep);
-        addStepButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(stepEditText.getText().length() > 0){
-                    steps.add(new Step(stepEditText.getText().toString(), stepCounter));
-                    stepStrings.add(steps.get(stepCounter).getStepString());
-                    stepCounter++;
-                    updateStepListView();
-                    stepEditText.setText("");
-                    try {
-                        hideKeyboard();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                try {
-                    createToast("Please enter a step");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
     //Method for hiding keyboard from https://stackoverflow.com/questions/13593069/androidhide-keyboard-after-button-click/13593232
     private void hideKeyboard() throws Exception{
@@ -134,26 +107,41 @@ public class RecipeCreateActivity extends AppCompatActivity {
         ingredientListView.setAdapter(adapter);
     }
 
-    private void initiateAddIngredientButton(){
-        Button addIngredientButton = findViewById(R.id.btnAddIngredient);
-        addIngredientButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(ingredientEditText.getText().length() > 0){
-                    Ingredient ingredient = new Ingredient(ingredientEditText.getText().toString());
-                    ingredients.add(ingredient);
-                    ingredientStrings.add(ingredient.getIdentifier());
-                    updateIngredientListView();
-                    ingredientEditText.setText("");
-                }
-                try {
-                    createToast("Please enter an ingredient");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+    public void addIngredientButton(View view){
+        if(ingredientEditText.getText().length() > 0){
+            Ingredient ingredient = new Ingredient(ingredientEditText.getText().toString());
+            ingredients.add(ingredient);
+            ingredientStrings.add(ingredient.getIdentifier());
+            updateIngredientListView();
+            ingredientEditText.setText("");
+        }
+        try {
+            createToast("Please enter an ingredient");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+    public void addStepButton(View view){
+        if(stepEditText.getText().length() > 0){
+            steps.add(new Step(stepEditText.getText().toString(), stepCounter));
+            stepStrings.add(steps.get(stepCounter).getStepString());
+            stepCounter++;
+            updateStepListView();
+            stepEditText.setText("");
+            try {
+                hideKeyboard();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            createToast("Please enter a step");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void initiateSaveButton(){
         Button saveButton = findViewById(R.id.saveBtn);
@@ -180,7 +168,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
     private void createToast(String message) throws Exception {
         //todo:empty method
-        throw new Exception("message");
+        throw new Exception(message);
     }
 
     private boolean recipeHasIngredientsAndSteps() {
