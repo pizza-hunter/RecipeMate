@@ -96,13 +96,28 @@ public class RecipeCreateActivityTest {
 
     @Test
     public void addButtonsUpdateListsTest(){
-        ingredientEditText.setText(ingredientNameEggs);
-        stepEditText.setText(step1Name);
-        btnIngredient.performClick();
-        btnStep.performClick();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ingredientEditText.setText(ingredientNameEggs);
+                stepEditText.setText(step1Name);
+                try {
+                    wait(1000);
+                    btnIngredient.performClick();
+                    btnStep.performClick();
+                    assertEquals(ingredientNameEggs,rca.getIngredients().get(0).getIdentifier());
+                    assertEquals(step1Name,rca.getSteps().get(0).getStepString());
+                    assertEquals(ingredientNameEggs,rca.getIngredientStrings().get(0));
+                    assertEquals(step1Name,rca.getStepStrings().get(0));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-        assertEquals(ingredientNameEggs,rca.getIngredients().get(0).getIdentifier());
-        assertEquals(step1Name,rca.getSteps().get(0).getStepString());
+
+
+
     }
 
     /*
