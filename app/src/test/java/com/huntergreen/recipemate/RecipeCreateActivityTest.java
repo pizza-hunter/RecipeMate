@@ -169,6 +169,11 @@ public class RecipeCreateActivityTest {
             }
         });
     }
+
+    @Test
+    public void saveButtonAddsItemsToDatabase(){
+
+    }
     /*
         Tests
         Input tests (allow inputs)
