@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
@@ -112,13 +113,32 @@ public class RecipeCreateActivityTest {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
             }
         });
     }
 
     @Test
     public void listItemAppearsInListViewTest(){
+        /*
+            Add items to edit texts
+            press add
+            get items from list view
+            compare list view items
+         */
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ingredientEditText.setText(ingredientNameEggs);
+                stepEditText.setText(step1Name);
+                try {
+                    wait(1000);
+                } catch (InterruptedException e) { e.printStackTrace(); }
+                btnIngredient.performClick();
+                btnStep.performClick();
 
+            }
+        });
     }
     /*
         Tests
