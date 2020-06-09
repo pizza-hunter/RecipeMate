@@ -29,18 +29,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initiateNewRecipeButton();
     }
 
-    private void initiateNewRecipeButton() {
-        Button newRecipeButton = findViewById(R.id.btnNewRecipe);
+    private void initiateNewRecipeButton(View view) {
         final Intent intent = new Intent(this, RecipeCreateActivity.class);
-        newRecipeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(intent));
-            }
-        });
+        startActivity(new Intent(intent));
     }
 
 
