@@ -36,32 +36,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(intent));
     }
 
-
-    private class MyAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return 0;
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int i, View convertView, ViewGroup container) {
-            return null;
-        }
-
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            return super.getDropDownView(position, convertView, parent);
-        }
-    }
 }
