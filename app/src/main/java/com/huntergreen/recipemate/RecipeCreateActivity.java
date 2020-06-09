@@ -1,5 +1,6 @@
 package com.huntergreen.recipemate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -141,10 +142,14 @@ public class RecipeCreateActivity extends AppCompatActivity {
     }
 
     public void saveButtonOnClick(View view){
+
         if(recipeHasIngredientsAndSteps()) {
             createRecipe();
             createIngredients();
             createSteps();
+            //todo: May need to call wait here
+            final Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
         else{
             try {
