@@ -207,6 +207,8 @@ public class RecipeCreateActivityTest {
             value entered in input appears as list item
         Save button test
             Items are added to db.
+
+        In future, a helper method to fill edit texts would be useful
      */
 
 
