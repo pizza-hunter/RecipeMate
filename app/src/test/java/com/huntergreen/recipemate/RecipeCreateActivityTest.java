@@ -46,6 +46,7 @@ public class RecipeCreateActivityTest {
 
     private Button btnIngredient;
     private Button btnStep;
+    private Button btnSave;
 
     private ListView listViewIngredients;
     private ListView listViewSteps;
@@ -69,6 +70,7 @@ public class RecipeCreateActivityTest {
 
         btnIngredient = rca.findViewById(R.id.btnAddIngredient);
         btnStep = rca.findViewById(R.id.btnAddStep);
+        btnSave = rca.findViewById(R.id.saveBtn);
 
         listViewIngredients = rca.findViewById(R.id.ingredientListView);
         listViewSteps = rca.findViewById(R.id.stepListView);
