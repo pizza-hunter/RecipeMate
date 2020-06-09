@@ -82,8 +82,6 @@ public class RecipeCreateActivity extends AppCompatActivity {
         stepListView = findViewById(R.id.stepListView);
         stepCounter = 0;
 
-        initiateSaveButton();
-
     }
 
 
@@ -142,28 +140,19 @@ public class RecipeCreateActivity extends AppCompatActivity {
         }
     }
 
-
-    private void initiateSaveButton(){
-        Button saveButton = findViewById(R.id.saveBtn);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(recipeHasIngredientsAndSteps()) {
-                    createRecipe();
-                    createIngredients();
-                    createSteps();
-                }
-                else{
-
-                    try {
-                        createToast("Please enter a value in all fields");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
+    public void saveButtonOnClick(View view){
+        if(recipeHasIngredientsAndSteps()) {
+            createRecipe();
+            createIngredients();
+            createSteps();
+        }
+        else{
+            try {
+                createToast("Please enter a value in all fields");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-        });
+        }
     }
 
     private void createToast(String message) throws Exception {
