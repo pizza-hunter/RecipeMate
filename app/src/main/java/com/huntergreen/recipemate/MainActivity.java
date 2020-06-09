@@ -8,10 +8,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
+import database.Recipe;
 import database.RecipeDB;
 
  /*
@@ -44,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateRecipeListView() {
+        ArrayList<String> recipeNames = new ArrayList<>();
+        for (Recipe recipe: RecipeDB.getInstance(getApplicationContext()).recipeDao().getAllRecipes()
+             ) {
+            recipeNames.add(recipe.getName());
+        }
+        ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,recipeNames);
 
     }
 }
