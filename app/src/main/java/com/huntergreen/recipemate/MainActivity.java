@@ -44,10 +44,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        updateRecipeListView();
+        updateRecipeListView(recipeListView);
     }
 
-    private void updateRecipeListView() {
+    public void updateRecipeListView(View view) {
         ArrayList<String> recipeNames = new ArrayList<>();
         for (Recipe recipe: RecipeDB.getInstance(getApplicationContext()).recipeDao().getAllRecipes()
              ) {
