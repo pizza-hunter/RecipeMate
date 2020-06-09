@@ -1,5 +1,6 @@
 package com.huntergreen.recipemate;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
@@ -20,15 +21,11 @@ import database.RecipeDB;
 
 public class MainActivity extends AppCompatActivity {
 
-//    RecipeDB db = Room.databaseBuilder(getApplicationContext(),
-//            RecipeDB.class, "RecipeDatabase").build();
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
     private void initiateNewRecipeButton(View view) {
@@ -36,4 +33,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(intent));
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateRecipeListView();
+    }
+
+    private void updateRecipeListView() {
+
+    }
 }
