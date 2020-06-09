@@ -174,7 +174,26 @@ public class RecipeCreateActivityTest {
 
     @Test
     public void saveButtonAddsItemsToDatabase(){
-
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                recipeEditText.setText(recipeName);
+                ingredientEditText.setText(ingredientNameEggs);
+                stepEditText.setText(step1Name);
+                try {
+                    wait(1000);
+                    btnStep.performClick();
+                    btnIngredient.performClick();
+                    btnSave.performClick();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                assertNotEquals(null,rca.recipe);
+                assertNotEquals(null,RecipeDB.getInstance(rca.getApplicationContext()).recipeDao().getAllRecipes());
+                assertNotEquals(null,RecipeDB.getInstance(rca.getApplicationContext()).recipeDao().getRecipesWithIngredients());
+                assertNotEquals(null,RecipeDB.getInstance(rca.getApplicationContext()).recipeDao().getRecipesWithSteps());
+            }
+        });
     }
     /*
         Tests
