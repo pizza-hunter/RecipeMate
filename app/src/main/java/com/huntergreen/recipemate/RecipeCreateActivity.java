@@ -25,7 +25,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
 
     //Recipe section
-    private Recipe recipe;
+    public Recipe recipe; //todo: change to private
     private EditText recipeNameEditText;
 
     //Ingredient section
