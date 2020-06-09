@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 import database.RecipeDB;
 
@@ -21,11 +22,14 @@ import database.RecipeDB;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ListView recipeListView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        recipeListView = findViewById(R.id.listViewRecipes);
     }
 
     private void initiateNewRecipeButton(View view) {
