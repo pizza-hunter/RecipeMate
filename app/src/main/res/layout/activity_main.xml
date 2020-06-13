@@ -28,6 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/btn_new_recipe"
         android:layout_marginTop="16dp"
+        android:onClick="initiateNewRecipeButton"
         />
 
     <androidx.appcompat.widget.SearchView
@@ -69,7 +70,8 @@
         android:onClick="updateRecipeListView"
         android:text="Refresh"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
