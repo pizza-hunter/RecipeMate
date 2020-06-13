@@ -21,6 +21,7 @@ import database.Ingredient;
 import database.Recipe;
 import database.RecipeDB;
 import database.Step;
+import databaseManager.DatabaseManager;
 
 public class RecipeCreateActivity extends AppCompatActivity {
 
@@ -42,6 +43,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
     private ListView stepListView;
     private int stepCounter;
 
+    private DatabaseManager dbm;
 
     //TODO: remove getter methods for lists after testing
     public ArrayList<Ingredient> getIngredients() {
@@ -59,7 +61,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
     public ArrayList<String> getStepStrings() {
         return stepStrings;
     }
-
+    private RecipeDB db;
     /*
         Issues
         List items are too tall.
@@ -69,6 +71,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_recipe);
+        dbm = new DatabaseManager(getApplicationContext());
 
         recipeNameEditText = findViewById(R.id.recipeNameEditText);
 
@@ -114,10 +117,12 @@ public class RecipeCreateActivity extends AppCompatActivity {
             updateIngredientListView();
             ingredientEditText.setText("");
         }
-        try {
-            createToast("Please enter an ingredient");
-        } catch (Exception e) {
-            e.printStackTrace();
+        else {
+            try {
+                createToast("Please enter an ingredient");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -134,10 +139,12 @@ public class RecipeCreateActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        try {
-            createToast("Please enter a step");
-        } catch (Exception e) {
-            e.printStackTrace();
+        else {
+            try {
+                createToast("Please enter a step");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -172,42 +179,16 @@ public class RecipeCreateActivity extends AppCompatActivity {
     }
 
     private void createSteps(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (Step step: steps
-                     ) {
-                    step.setRecipeStepID(recipe.getRecipeId());
-                    RecipeDB.getInstance(getApplicationContext()).recipeDao().insertStep(step);
-                    Log.d("Tag",recipe.getName()+"Recipe added to database");
-                }
-            }
-        });
+        dbm.insertSteps(steps, recipe);
     }
 
     private void createIngredients(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (Ingredient ingredient: ingredients
-                     ) {
-                    ingredient.setRecipeIngredientID(recipe.getRecipeId());
-                    RecipeDB.getInstance(getApplicationContext()).recipeDao().insertIngredient(ingredient);
-                    Log.d("Tag",recipe.getName()+"Recipe added to database");
-                }
-            }
-        });
+     dbm.insertIngredients(ingredients,recipe);
     }
 
     private void createRecipe() {
         this.recipe = new Recipe(this.recipeNameEditText.getText().toString(),0);
-        new Thread(new Runnable(){
-            @Override
-            public void run() {
-                RecipeDB.getInstance(getApplicationContext()).recipeDao().insertRecipe(recipe);
-                Log.d("Tag",recipe.getName()+"Recipe added to database");
-            }
-        });
+        dbm.insertRecipe(recipe);
     }
 
 
