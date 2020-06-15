@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> recipeNames;
     private DatabaseManager dbm;
 
+    private RecipeDB db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 dbm = new DatabaseManager(getApplicationContext());
             }
-        });
+        }).start();
     }
 
     public void initiateNewRecipeButton(View view) {
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         try {
+
             updateRecipeListView(recipeListView);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -66,15 +69,48 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateRecipeListView(View view) throws InterruptedException {
+        exampleRunnable runnable = new exampleRunnable();
+        new Thread(runnable).start();
 
-        while (dbm == null){}
-        for (Recipe recipe : dbm.getRecipes()
-        ) {
-            recipeNames.add(recipe.getName());
+
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                db = RecipeDB.getInstance(getApplicationContext());
+//            }
+//        });
+//
+//        for (Recipe recipe : db.recipeDao().getAllRecipes()
+//        ) {
+//            recipeNames.add(recipe.getName());
+//        }
+//        ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, recipeNames);
+//        recipeListView.setAdapter(adapter);
+
+    }
+
+    class exampleRunnable implements Runnable{
+
+        exampleRunnable(){}
+
+        @Override
+        public void run() {
+
+            db = RecipeDB.getInstance(getApplicationContext());
+            recipeNames.clear();
+            for (Recipe recipe : db.recipeDao().getAllRecipes()
+            ) {
+                recipeNames.add(recipe.getName());
+            }
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, recipeNames);
+                    recipeListView.setAdapter(adapter);
+                }
+            });
         }
-        ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, recipeNames);
-        recipeListView.setAdapter(adapter);
-
     }
 
 }
