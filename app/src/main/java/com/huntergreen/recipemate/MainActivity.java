@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView recipeListView;
     private ArrayList<String> recipeNames;
-    private DatabaseManager dbm;
+    //private DatabaseManager dbm;
 
     private RecipeDB db;
 
@@ -39,18 +39,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recipeNames = new ArrayList<>();
-        initiateDatabaseManager();
+       // initiateDatabaseManager();
         recipeListView = findViewById(R.id.listViewRecipes);
     }
 
-    private void initiateDatabaseManager(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                dbm = new DatabaseManager(getApplicationContext());
-            }
-        }).start();
-    }
+//    private void initiateDatabaseManager(){
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                dbm = new DatabaseManager(getApplicationContext());
+//            }
+//        }).start();
+//    }
 
     public void initiateNewRecipeButton(View view) {
         final Intent intent = new Intent(this, RecipeCreateActivity.class);
@@ -69,8 +69,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateRecipeListView(View view) throws InterruptedException {
-        exampleRunnable runnable = new exampleRunnable();
-        new Thread(runnable).start();
+       // exampleRunnable runnable = new exampleRunnable();
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                db = RecipeDB.getInstance(getApplicationContext());
+                recipeNames.clear();
+                for (Recipe recipe : db.recipeDao().getAllRecipes()
+                ) {
+                    recipeNames.add(recipe.getName());
+                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, recipeNames);
+                        recipeListView.setAdapter(adapter);
+                    }
+                });
+            }
+        }).start();
 
 
 //        new Thread(new Runnable() {
