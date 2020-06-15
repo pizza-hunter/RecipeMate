@@ -179,11 +179,11 @@ public class RecipeCreateActivity extends AppCompatActivity {
     }
 
     private void createSteps(){
-        dbm.insertSteps(steps, recipe);
+        dbm.insertSteps(steps,recipe);
     }
 
     private void createIngredients(){
-     dbm.insertIngredients(ingredients,recipe);
+        dbm.insertIngredients(ingredients,recipe);
     }
 
     private void createRecipe() {

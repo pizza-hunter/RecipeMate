@@ -26,7 +26,7 @@ public class DatabaseManager {
             public void run() {
                 db.recipeDao().insertRecipe(recipe);
             }
-        });
+        }).start();
     }
 
     public void insertIngredients(final List<Ingredient> ingredients, final Recipe recipe){
@@ -39,7 +39,7 @@ public class DatabaseManager {
                     db.recipeDao().insertIngredient(ingredient);
                 }
             }
-        });
+        }).start();
     }
 
     public void insertSteps(final List<Step> steps, final Recipe recipe){
@@ -52,21 +52,21 @@ public class DatabaseManager {
                     db.recipeDao().insertStep(step);
                 }
             }
-        });
+        }).start();
     }
 
     public List<Recipe> getRecipes(){
-        setRecipesList();
-        return returnList;
-    }
-
-    private void setRecipesList(){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 returnList = (ArrayList<Recipe>) db.recipeDao().getAllRecipes();
             }
-        });
+        }).start();
+        return returnList;
+    }
+
+    private void setRecipesList(){
+
     }
 
 }
