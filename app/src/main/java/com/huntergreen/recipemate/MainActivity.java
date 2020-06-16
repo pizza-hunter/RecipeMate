@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         Intent intent = new Intent();
         intent.setClass(this, RecipeListItemDetailActivity.class);
+        String recipeNameText = recipeListView.getItemAtPosition(position).toString(); //could have incorrect string value
+        intent.putExtra("name", recipeNameText);
         intent.putExtra("position", position); //Use position to determine which recipe
         intent.putExtra("id", id);
         startActivity(intent);
