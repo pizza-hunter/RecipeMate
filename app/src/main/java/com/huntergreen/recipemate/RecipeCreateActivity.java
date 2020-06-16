@@ -7,6 +7,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -108,6 +109,11 @@ public class RecipeCreateActivity extends AppCompatActivity {
             ingredientStrings.add(ingredient.getIdentifier());
             updateIngredientListView();
             ingredientEditText.setText("");
+            try {
+                hideKeyboard();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         else {
             try {
