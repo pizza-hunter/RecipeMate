@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -19,7 +20,7 @@ import database.RecipeDB;
  */
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView recipeListView;
     private ArrayList<String> recipeNames;
@@ -68,4 +69,12 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        Intent intent = new Intent();
+        intent.setClass(this, RecipeListItemDetailActivity.class);
+        intent.putExtra("position", position); //Use position to determine which recipe
+        intent.putExtra("id", id);
+        startActivity(intent);
+    }
 }
