@@ -79,4 +79,32 @@ public class DatabaseManager {
         });
         return recipe[0];
     }
+
+    public ArrayList<String> getRecipeIngredients(final Recipe recipe) {
+        final ArrayList<String> ingredients = new ArrayList<>();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (Ingredient ingredient: db.recipeDao().getRecipeIngredients(recipe.getRecipeId())
+                     ) {
+                    ingredients.add(ingredient.getIdentifier());
+                }
+            }
+        });
+        return ingredients;
+    }
+
+    public ArrayList<String> getRecipeSteps(final Recipe recipe) {
+        final ArrayList<String> steps = new ArrayList<>();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (Step step: db.recipeDao().getRecipeSteps(recipe.getRecipeId())
+                ) {
+                    steps.add(step.getStepString());
+                }
+            }
+        });
+        return steps;
+    }
 }
