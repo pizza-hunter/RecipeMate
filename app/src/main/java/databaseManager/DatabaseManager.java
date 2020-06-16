@@ -1,59 +1,72 @@
 package databaseManager;
 
-import androidx.room.Dao;
-import androidx.room.RoomDatabase;
+import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import database.Ingredient;
 import database.Recipe;
-import database.RecipeDao;
+import database.RecipeDB;
 import database.Step;
 
 public class DatabaseManager {
 
-    private RoomDatabase db;
-    private RecipeDao dao;
+    private RecipeDB db;
+    private ArrayList<Recipe> returnList;
 
-    public DatabaseManager(RoomDatabase db, RecipeDao dao) {
-        this.db = db;
-        this.dao = dao;
+    public DatabaseManager(Context context){
+        db = RecipeDB.getInstance(context);
     }
 
-    public Recipe getRecipe(String name){
-        return dao.findRecipeByName(name);
+    //May run into issue of ingredients/steps trying to access recipe before it has been initalised.
+    public void insertRecipe(final Recipe recipe){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                db.recipeDao().insertRecipe(recipe);
+            }
+        }).start();
     }
 
-    public List<Ingredient> getRecipeIngredients(Recipe recipe){
-        return dao.getRecipeIngredients(recipe.getRecipeId());
+    public void insertIngredients(final List<Ingredient> ingredients, final Recipe recipe){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (Ingredient ingredient: ingredients
+                     ) {
+                    ingredient.setRecipeIngredientID(recipe.getRecipeId());
+                    db.recipeDao().insertIngredient(ingredient);
+                }
+            }
+        }).start();
     }
 
-    public List<Step> getRecipeSteps(Recipe recipe){
-        return dao.getRecipeSteps(recipe.getRecipeId());
+    public void insertSteps(final List<Step> steps, final Recipe recipe){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (Step step: steps
+                     ) {
+                    step.setRecipeStepID(recipe.getRecipeId());
+                    db.recipeDao().insertStep(step);
+                }
+            }
+        }).start();
     }
 
     public List<Recipe> getRecipes(){
-        return dao.getAllRecipes();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                returnList = (ArrayList<Recipe>) db.recipeDao().getAllRecipes();
+            }
+        }).start();
+        return returnList;
     }
 
-    public void insertRecipeIngredientsSteps(Recipe recipe, List<Ingredient> ingredients, List<Step> steps){
-        dao.insertRecipe(recipe);
-        insertIngredients(ingredients);
-        insertSteps(steps);
-    }
+    private void setRecipesList(){
 
-    private void insertSteps(List<Step> steps){
-        for (Step step: steps
-             ) {
-            dao.insertStep(step);
-        }
-    }
-
-    private void insertIngredients(List<Ingredient> ingredients){
-        for (Ingredient ingredient: ingredients
-        ) {
-            dao.insertIngredient(ingredient);
-        }
     }
 
 }

@@ -1,16 +1,12 @@
 package com.huntergreen.recipemate;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -18,25 +14,27 @@ import java.util.ArrayList;
 import database.Recipe;
 import database.RecipeDB;
 
+
  /*
     todo: query free space on device before accessing local app-specific data https://developer.android.com/training/data-storage/app-specific#query-free-space
-
  */
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView recipeListView;
+    private ArrayList<String> recipeNames;
+    private RecipeDB db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        recipeNames = new ArrayList<>();
         recipeListView = findViewById(R.id.listViewRecipes);
     }
 
-    private void initiateNewRecipeButton(View view) {
+    public void initiateNewRecipeButton(View view) {
         final Intent intent = new Intent(this, RecipeCreateActivity.class);
         startActivity(new Intent(intent));
     }
@@ -48,12 +46,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateRecipeListView(View view) {
-        ArrayList<String> recipeNames = new ArrayList<>();
-        for (Recipe recipe: RecipeDB.getInstance(getApplicationContext()).recipeDao().getAllRecipes()
-             ) {
-            recipeNames.add(recipe.getName());
-        }
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,recipeNames);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                db = RecipeDB.getInstance(getApplicationContext());
+                recipeNames.clear();
+                for (Recipe recipe : db.recipeDao().getAllRecipes()
+                ) {
+                    recipeNames.add(recipe.getName());
+                }
 
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ArrayAdapter adapter = new ArrayAdapter<>(getApplicationContext(),
+                                android.R.layout.simple_list_item_1,
+                                recipeNames);
+                        recipeListView.setAdapter(adapter);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        Intent intent = new Intent();
+        intent.setClass(this, RecipeListItemDetailActivity.class);
+        intent.putExtra("position", position); //Use position to determine which recipe
+        intent.putExtra("id", id);
+        startActivity(intent);
     }
 }

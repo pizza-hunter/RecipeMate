@@ -2,25 +2,23 @@ package com.huntergreen.recipemate;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 import database.Ingredient;
 import database.Recipe;
-import database.RecipeDB;
 import database.Step;
+import databaseManager.DatabaseManager;
 
 public class RecipeCreateActivity extends AppCompatActivity {
 
@@ -42,24 +40,21 @@ public class RecipeCreateActivity extends AppCompatActivity {
     private ListView stepListView;
     private int stepCounter;
 
+    private DatabaseManager dbm;
 
     //TODO: remove getter methods for lists after testing
     public ArrayList<Ingredient> getIngredients() {
         return ingredients;
     }
-
     public ArrayList<String> getIngredientStrings() {
         return ingredientStrings;
     }
-
     public ArrayList<Step> getSteps() {
         return steps;
     }
-
     public ArrayList<String> getStepStrings() {
         return stepStrings;
     }
-
     /*
         Issues
         List items are too tall.
@@ -69,6 +64,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_recipe);
+        dbm = new DatabaseManager(getApplicationContext());
 
         recipeNameEditText = findViewById(R.id.recipeNameEditText);
 
@@ -85,24 +81,24 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
     }
 
-
     //Method for hiding keyboard from https://stackoverflow.com/questions/13593069/androidhide-keyboard-after-button-click/13593232
     private void hideKeyboard() throws Exception{
         try {
             InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            assert imm != null;
+            imm.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(), 0);
         } catch (Exception e){
             System.out.println("Keyboard not active");
         }
     }
 
     private void updateStepListView() {
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,stepStrings);
+        ArrayAdapter adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,stepStrings);
         stepListView.setAdapter(adapter);
     }
 
     private void updateIngredientListView() {
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,ingredientStrings);
+        ArrayAdapter adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,ingredientStrings);
         ingredientListView.setAdapter(adapter);
     }
 
@@ -113,11 +109,18 @@ public class RecipeCreateActivity extends AppCompatActivity {
             ingredientStrings.add(ingredient.getIdentifier());
             updateIngredientListView();
             ingredientEditText.setText("");
+            try {
+                hideKeyboard();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        try {
-            createToast("Please enter an ingredient");
-        } catch (Exception e) {
-            e.printStackTrace();
+        else {
+            try {
+                createToast("Please enter an ingredient");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -134,20 +137,20 @@ public class RecipeCreateActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        try {
-            createToast("Please enter a step");
-        } catch (Exception e) {
-            e.printStackTrace();
+        else {
+            try {
+                createToast("Please enter a step");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public void saveButtonOnClick(View view){
-
         if(recipeHasIngredientsAndSteps()) {
             createRecipe();
             createIngredients();
             createSteps();
-            //todo: May need to call wait here
             final Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
@@ -161,8 +164,10 @@ public class RecipeCreateActivity extends AppCompatActivity {
     }
 
     private void createToast(String message) throws Exception {
-        //todo:empty method
-        throw new Exception(message);
+        Toast toast = Toast.makeText(getApplicationContext(),
+                message,
+                Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     private boolean recipeHasIngredientsAndSteps() {
@@ -172,46 +177,16 @@ public class RecipeCreateActivity extends AppCompatActivity {
     }
 
     private void createSteps(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (Step step: steps
-                     ) {
-                    step.setRecipeStepID(recipe.getRecipeId());
-                    RecipeDB.getInstance(getApplicationContext()).recipeDao().insertStep(step);
-                    Log.d("Tag",recipe.getName()+"Recipe added to database");
-                }
-            }
-        });
+        dbm.insertSteps(steps,recipe);
     }
 
     private void createIngredients(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (Ingredient ingredient: ingredients
-                     ) {
-                    ingredient.setRecipeIngredientID(recipe.getRecipeId());
-                    RecipeDB.getInstance(getApplicationContext()).recipeDao().insertIngredient(ingredient);
-                    Log.d("Tag",recipe.getName()+"Recipe added to database");
-                }
-            }
-        });
+        dbm.insertIngredients(ingredients,recipe);
     }
 
     private void createRecipe() {
         this.recipe = new Recipe(this.recipeNameEditText.getText().toString(),0);
-        new Thread(new Runnable(){
-            @Override
-            public void run() {
-                RecipeDB.getInstance(getApplicationContext()).recipeDao().insertRecipe(recipe);
-                Log.d("Tag",recipe.getName()+"Recipe added to database");
-            }
-        });
+        dbm.insertRecipe(recipe);
     }
-
-
-
-
 
 }
