@@ -76,7 +76,7 @@ public class DatabaseManager {
             public void run() {
                 recipe[0] = db.recipeDao().findRecipeByName(name);
             }
-        });
+        }).start();
         return recipe[0];
     }
 
@@ -90,7 +90,7 @@ public class DatabaseManager {
                     ingredients.add(ingredient.getIdentifier());
                 }
             }
-        });
+        }).start();
         return ingredients;
     }
 
@@ -104,7 +104,7 @@ public class DatabaseManager {
                     steps.add(step.getStepString());
                 }
             }
-        });
+        }).start();
         return steps;
     }
 }
