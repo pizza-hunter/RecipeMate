@@ -2,24 +2,20 @@ package com.huntergreen.recipemate;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 import database.Ingredient;
 import database.Recipe;
-import database.RecipeDB;
 import database.Step;
 import databaseManager.DatabaseManager;
 
@@ -49,19 +45,15 @@ public class RecipeCreateActivity extends AppCompatActivity {
     public ArrayList<Ingredient> getIngredients() {
         return ingredients;
     }
-
     public ArrayList<String> getIngredientStrings() {
         return ingredientStrings;
     }
-
     public ArrayList<Step> getSteps() {
         return steps;
     }
-
     public ArrayList<String> getStepStrings() {
         return stepStrings;
     }
-    private RecipeDB db;
     /*
         Issues
         List items are too tall.
@@ -88,24 +80,24 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
     }
 
-
     //Method for hiding keyboard from https://stackoverflow.com/questions/13593069/androidhide-keyboard-after-button-click/13593232
     private void hideKeyboard() throws Exception{
         try {
             InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            assert imm != null;
+            imm.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(), 0);
         } catch (Exception e){
             System.out.println("Keyboard not active");
         }
     }
 
     private void updateStepListView() {
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,stepStrings);
+        ArrayAdapter adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,stepStrings);
         stepListView.setAdapter(adapter);
     }
 
     private void updateIngredientListView() {
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,ingredientStrings);
+        ArrayAdapter adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,ingredientStrings);
         ingredientListView.setAdapter(adapter);
     }
 
@@ -149,12 +141,10 @@ public class RecipeCreateActivity extends AppCompatActivity {
     }
 
     public void saveButtonOnClick(View view){
-
         if(recipeHasIngredientsAndSteps()) {
             createRecipe();
             createIngredients();
             createSteps();
-            //todo: May need to call wait here
             final Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
@@ -168,8 +158,10 @@ public class RecipeCreateActivity extends AppCompatActivity {
     }
 
     private void createToast(String message) throws Exception {
-        //todo:empty method
-        throw new Exception(message);
+        Toast toast = Toast.makeText(getApplicationContext(),
+                message,
+                Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     private boolean recipeHasIngredientsAndSteps() {
@@ -190,9 +182,5 @@ public class RecipeCreateActivity extends AppCompatActivity {
         this.recipe = new Recipe(this.recipeNameEditText.getText().toString(),0);
         dbm.insertRecipe(recipe);
     }
-
-
-
-
 
 }

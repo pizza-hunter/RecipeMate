@@ -16,7 +16,6 @@ import database.RecipeDB;
 
  /*
     todo: query free space on device before accessing local app-specific data https://developer.android.com/training/data-storage/app-specific#query-free-space
-
  */
 
 
