@@ -69,4 +69,14 @@ public class DatabaseManager {
 
     }
 
+    public Recipe getRecipe(final String name) {
+        final Recipe[] recipe = new Recipe[1];
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                recipe[0] = db.recipeDao().findRecipeByName(name);
+            }
+        });
+        return recipe[0];
+    }
 }
