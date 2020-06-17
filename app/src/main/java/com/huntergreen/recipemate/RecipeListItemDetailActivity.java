@@ -43,8 +43,8 @@ public class RecipeListItemDetailActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                ingredientStrings = dbm.getRecipeIngredients((int) recipe.getRecipeId());
-                stepStrings = dbm.getRecipeSteps(recipe);
+                ingredientStrings = dbm.getRecipeIngredients(recipe.getName());
+                stepStrings = dbm.getRecipeSteps(recipe.getName());
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

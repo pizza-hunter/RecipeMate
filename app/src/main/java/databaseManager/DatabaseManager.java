@@ -65,27 +65,32 @@ public class DatabaseManager {
         return returnList;
     }
 
-    private void setRecipesList(){
 
-    }
 
-    public Recipe getRecipe(final String name) {
-        final Recipe[] recipe = new Recipe[1];
-        new Thread(new Runnable() {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    public ArrayList<Recipe> getRecipe(final String name) throws InterruptedException {
+        final ArrayList<Recipe> recipes;
+
+        Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                recipe[0] = db.recipeDao().findRecipeByName(name);
+                returnList = (ArrayList<Recipe>) db.recipeDao().findRecipeByName(name);
             }
-        }).start();
-        return recipe[0];
+        });
+        t1.start();
+        t1.join();
+        return returnList;
     }
 
-    public ArrayList<String> getRecipeIngredients(final Recipe recipe) {
+    public ArrayList<String> getRecipeIngredients(final String recipeName) {
         final ArrayList<String> ingredients = new ArrayList<>();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for (Ingredient ingredient: db.recipeDao().getRecipeIngredients(recipe.getRecipeId())
+                for (Ingredient ingredient: db.recipeDao().getRecipeIngredients(db.recipeDao().findRecipeByName(recipeName).get(0).getRecipeId())
                      ) {
                     ingredients.add(ingredient.getIdentifier());
                 }
@@ -94,12 +99,12 @@ public class DatabaseManager {
         return ingredients;
     }
 
-    public ArrayList<String> getRecipeSteps(final Recipe recipe) {
+    public ArrayList<String> getRecipeSteps(final String recipeName) {
         final ArrayList<String> steps = new ArrayList<>();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for (Step step: db.recipeDao().getRecipeSteps(recipe.getRecipeId())
+                for (Step step: db.recipeDao().getRecipeSteps(db.recipeDao().findRecipeByName(recipeName).get(0).getRecipeId())
                 ) {
                     steps.add(step.getStepString());
                 }
