@@ -28,11 +28,32 @@ public class RecipeListItemDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_list_item_detail);
-        this.dbm = new DatabaseManager(getApplicationContext());
-        this.intent = getIntent();
-        this.recipe = dbm.getRecipe(intent.getStringExtra("name"));
-        this.ingredientStrings = dbm.getRecipeIngredients(recipe);
-        this.stepStrings = dbm.getRecipeSteps(recipe);
+
+        linearLayout = findViewById(R.id.linearLayoutRecipeItemDetail);
+        layoutCounter = 1;
+        recipeTitle = findViewById(R.id.recipeNameTitle);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                dbm = new DatabaseManager(getApplicationContext());
+                intent = getIntent();
+                try {
+                    recipe = dbm.getRecipe(intent.getStringExtra("name")).get(0);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                ingredientStrings = dbm.getRecipeIngredients((int) recipe.getRecipeId());
+                stepStrings = dbm.getRecipeSteps(recipe);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                    recipeTitle.setText(recipe.getName());
+                    generateIngredients();
+                    }
+                });
+            }
+        }).start();
     }
 
     public void generateIngredients(){
