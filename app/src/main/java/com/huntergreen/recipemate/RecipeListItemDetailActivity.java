@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -17,6 +19,10 @@ public class RecipeListItemDetailActivity extends AppCompatActivity {
     private Intent intent;
     private ArrayList<String> ingredientStrings;
     private ArrayList<String> stepStrings;
+
+    private LinearLayout linearLayout;
+    private int layoutCounter;
+    private TextView recipeTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
