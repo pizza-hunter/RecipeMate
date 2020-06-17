@@ -27,11 +27,11 @@ public interface RecipeDao {
     @Query("SELECT * FROM recipe")
     List<Recipe> getAllRecipes();
 
-    @Query(("SELECT * FROM recipe WHERE recipe_id LIKE:searchID"))
-    Recipe findRecipeByID(long searchID);
+    @Query(("SELECT * FROM recipe WHERE recipe_id LIKE :searchID"))
+    List<Recipe> findRecipeByID(long searchID);
 
     @Query("SELECT * FROM recipe WHERE recipe_name LIKE :searchName")
-    Recipe findRecipeByName(String searchName);
+    List<Recipe> findRecipeByName(String searchName);
 
     @Transaction
     @Query("SELECT * FROM Recipe")
