@@ -32,6 +32,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         recipeNames = new ArrayList<>();
         recipeListView = findViewById(R.id.listViewRecipes);
+
+        recipeListView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.setClass(getApplicationContext(), RecipeListItemDetailActivity.class);
+                String recipeNameText = recipeListView.getItemAtPosition(position).toString(); //could have incorrect string value
+                intent.putExtra("name", recipeNameText);
+                intent.putExtra("position", position); //Use position to determine which recipe
+                intent.putExtra("id", id);
+                startActivity(intent);
+            }
+        });
     }
 
     public void initiateNewRecipeButton(View view) {
@@ -71,12 +84,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        Intent intent = new Intent();
-        intent.setClass(this, RecipeListItemDetailActivity.class);
-        String recipeNameText = recipeListView.getItemAtPosition(position).toString(); //could have incorrect string value
-        intent.putExtra("name", recipeNameText);
-        intent.putExtra("position", position); //Use position to determine which recipe
-        intent.putExtra("id", id);
-        startActivity(intent);
+
     }
 }
