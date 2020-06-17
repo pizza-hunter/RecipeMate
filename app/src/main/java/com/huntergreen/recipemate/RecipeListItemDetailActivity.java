@@ -57,10 +57,16 @@ public class RecipeListItemDetailActivity extends AppCompatActivity {
     }
 
     public void generateIngredients(){
-
+        for (String ingredient: ingredientStrings
+             ) {
+            TextView textView = new TextView(getApplicationContext());
+            textView.setText(ingredient);
+            linearLayout.addView(textView,layoutCounter);
+            layoutCounter++;
+        }
     }
     /*
-        Get information about recipe through intent position var
+        Get information about recipe through intent name var, as ID's won't match positions if tuples are deleted.
         Create text views for each ingredient
         Create text views for each step
         Include a rating bar, to update rating of recipe
