@@ -1,58 +1,57 @@
 package database;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import static androidx.room.ForeignKey.CASCADE;
 
-@Entity
+import java.util.UUID;
+
+@Entity(tableName = "Step",
+        foreignKeys = @ForeignKey
+        (entity = Recipe.class,
+        parentColumns = "id",
+        childColumns = "recipe_id",
+        onDelete = CASCADE))
 public class Step {
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "step_id")
-    private long stepID;
+    @PrimaryKey
+    public final String id;
+    public final String text;
+    public final String step_number;
+    public final String recipe_id;
 
-    @ColumnInfo(name = "step_string")
-    private String stepString;
-
-    @ColumnInfo(name = "step_number")
-    private int stepNumber;
-
-    @ColumnInfo(name = "recipe_step_id")
-    private long recipeStepID;
-
-    public Step(String stepString, int stepNumber) {
-        this.stepString = stepString;
-        this.stepNumber = stepNumber;
+    @Ignore
+    public Step(String text, String step_number){
+        this(text,step_number,null);
     }
 
-    public void setStepID(long stepID) {
-        this.stepID = stepID;
+    @Ignore
+    public Step(String text, String step_number, String recipe_id) {
+        this(UUID.randomUUID().toString(),text,step_number,recipe_id);
     }
 
-    public long getStepID() {
-        return stepID;
+    public Step(String id, String text, String step_number, String recipe_id) {
+        this.id = id;
+        this.text = text;
+        this.step_number = step_number;
+        this.recipe_id = recipe_id;
     }
 
-    public String getStepString() {
-        return stepString;
+    public String getId() {
+        return id;
     }
 
-    public void setStepString(String stepString) {
-        this.stepString = stepString;
+    public String getText() {
+        return text;
     }
 
-    public void setStepNumber(int stepNumber) {
-        this.stepNumber = stepNumber;
+    public String getStep_number() {
+        return step_number;
     }
 
-    public int getStepNumber() {
-        return stepNumber;
+    public String getRecipe_id() {
+        return recipe_id;
     }
-
-    public void setRecipeStepID(long recipeStepID) {
-        this.recipeStepID = recipeStepID;
-    }
-
-    public long getRecipeStepID() { return recipeStepID; }
-
 }

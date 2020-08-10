@@ -1,48 +1,51 @@
 package database;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import static androidx.room.ForeignKey.CASCADE;
 
-@Entity
+import java.util.UUID;
+
+@Entity(tableName = "Ingredient",
+        foreignKeys = @ForeignKey(
+        entity = Recipe.class,
+        parentColumns = "id",
+        childColumns = "recipe_id",
+        onDelete = CASCADE))
 public class Ingredient {
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "ingredient_id")
-    private int id;
+    @PrimaryKey
+    public final String id;
+    public final String text;
+    public final String recipe_id;
 
-    @ColumnInfo(name = "ingredient_identifier")
-    private String identifier;
-
-    @ColumnInfo(name = "recipe_ingredient_id")
-    private long recipeIngredientID;
-
-
-    public Ingredient(String identifier){
-        this.identifier = identifier;
+    @Ignore
+    public Ingredient(String text){
+        this(text, null);
     }
 
-    public int getId() {
+    @Ignore
+    public Ingredient(String text, String recipe_id){
+        this(UUID.randomUUID().toString(), text, recipe_id);
+    }
+
+    public Ingredient(String id, String text, String recipe_id){
+        this.id = id;
+        this.text = text;
+        this.recipe_id = recipe_id;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public String getIdentifier() {
-        return identifier;
+    public String getText() {
+        return text;
     }
 
-    public long getRecipeIngredientID() {
-        return recipeIngredientID;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
-    }
-
-    public void setRecipeIngredientID(long recipeIngredientID) {
-        this.recipeIngredientID = recipeIngredientID;
+    public String getRecipe_id() {
+        return recipe_id;
     }
 }
