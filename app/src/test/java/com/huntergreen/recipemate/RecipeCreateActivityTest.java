@@ -190,8 +190,8 @@ public class RecipeCreateActivityTest {
                 }
                 assertNotEquals(null,rca.recipe);
                 assertNotEquals(null,RecipeDB.getInstance(rca.getApplicationContext()).recipeDao().getAllRecipes());
-                assertNotEquals(null,RecipeDB.getInstance(rca.getApplicationContext()).recipeDao().getRecipesWithIngredients());
-                assertNotEquals(null,RecipeDB.getInstance(rca.getApplicationContext()).recipeDao().getRecipesWithSteps());
+//                assertNotEquals(null,RecipeDB.getInstance(rca.getApplicationContext()).recipeDao().getRecipesWithIngredients());
+//                assertNotEquals(null,RecipeDB.getInstance(rca.getApplicationContext()).recipeDao().getRecipesWithSteps());
             }
         });
     }

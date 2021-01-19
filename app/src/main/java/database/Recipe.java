@@ -16,13 +16,9 @@ public class Recipe {
     @ColumnInfo(name = "recipe_name")
     private String name;
 
-    @ColumnInfo(name = "recipe_rating")
-    private double rating;
-
-
-    public Recipe(String name, double rating) {
-        this.name = name;
-        this.rating = rating;
+    @Ignore
+    public Recipe(String name){
+        this(name, null);
     }
 
     public void setRecipeId(long recipeId) {

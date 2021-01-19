@@ -104,9 +104,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
     public void addIngredientButton(View view){
         if(ingredientEditText.getText().length() > 0){
-            Ingredient ingredient = new Ingredient(ingredientEditText.getText().toString());
-            ingredients.add(ingredient);
-            ingredientStrings.add(ingredient.getIdentifier());
+            ingredientStrings.add(ingredientEditText.getText().toString());
             updateIngredientListView();
             ingredientEditText.setText("");
             try {
@@ -126,9 +124,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
     public void addStepButton(View view){
         if(stepEditText.getText().length() > 0){
-            steps.add(new Step(stepEditText.getText().toString(), stepCounter));
-            stepStrings.add(steps.get(stepCounter).getStepString());
-            stepCounter++;
+            stepStrings.add(stepEditText.getText().toString());
             updateStepListView();
             stepEditText.setText("");
             try {
@@ -172,15 +168,24 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
     private boolean recipeHasIngredientsAndSteps() {
         return recipeNameEditText.getText() != null &&
-                ingredients.size() > 0 &&
-                steps.size() > 0;
+                ingredientStrings.size() > 0 &&
+                stepStrings.size() > 0;
     }
 
     private void createSteps(){
+        for (String stepName: stepStrings
+             ) {
+            steps.add(new Step(stepName,stepCounter,recipe.getRecipeId()));
+            stepCounter++;
+        }
         dbm.insertSteps(steps,recipe);
     }
 
     private void createIngredients(){
+        for (String identifier: ingredientStrings
+             ) {
+            ingredients.add(new Ingredient(identifier,recipe.getRecipeId()));
+        }
         dbm.insertIngredients(ingredients,recipe);
     }
 

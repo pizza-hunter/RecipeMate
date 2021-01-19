@@ -10,9 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import database.Recipe;
 import database.RecipeDB;
+import databaseManager.DatabaseManager;
 
 
  /*
@@ -24,7 +26,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private ListView recipeListView;
     private ArrayList<String> recipeNames;
-    private RecipeDB db;
+    //Test code below
+    private DatabaseManager dbm;
+    private List<Recipe> recipeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         recipeNames = new ArrayList<>();
         recipeListView = findViewById(R.id.listViewRecipes);
 
+        //todo: move this code to new method
         recipeListView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -60,15 +65,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void updateRecipeListView(View view) {
         new Thread(new Runnable() {
+
             @Override
             public void run() {
-                db = RecipeDB.getInstance(getApplicationContext());
                 recipeNames.clear();
-                for (Recipe recipe : db.recipeDao().getAllRecipes()
+                dbm = new DatabaseManager(getApplicationContext());
+                recipeList = dbm.getRecipes();
+                for (Recipe recipe : recipeList
                 ) {
                     recipeNames.add(recipe.getName());
                 }
-
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

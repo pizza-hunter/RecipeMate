@@ -19,6 +19,9 @@ public class DatabaseManager {
         db = RecipeDB.getInstance(context);
     }
 
+    //todo: create method that keeps track of an incremented counter for primary keys, Recipe, Ing, Step
+
+
     //May run into issue of ingredients/steps trying to access recipe before it has been initalised.
     public void insertRecipe(final Recipe recipe){
         new Thread(new Runnable() {
@@ -36,7 +39,7 @@ public class DatabaseManager {
                 for (Ingredient ingredient: ingredients
                      ) {
                     ingredient.setRecipeIngredientID(recipe.getRecipeId());
-                    db.recipeDao().insertIngredient(ingredient);
+                    db.ingredientDao().insertIngredient(ingredient);
                 }
             }
         }).start();
@@ -49,7 +52,7 @@ public class DatabaseManager {
                 for (Step step: steps
                      ) {
                     step.setRecipeStepID(recipe.getRecipeId());
-                    db.recipeDao().insertStep(step);
+                    db.stepDao().insertStep(step);
                 }
             }
         }).start();
@@ -84,32 +87,36 @@ public class DatabaseManager {
         t1.join();
         return returnList;
     }
-
-    public ArrayList<String> getRecipeIngredients(final String recipeName) {
+    //todo: steps and ingredients foreign key for recipe id not being set
+    public ArrayList<String> getRecipeIngredients(final String recipeName) throws InterruptedException {
         final ArrayList<String> ingredients = new ArrayList<>();
-        new Thread(new Runnable() {
+        Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                for (Ingredient ingredient: db.recipeDao().getRecipeIngredients(db.recipeDao().findRecipeByName(recipeName).get(0).getRecipeId())
+                for (Ingredient ingredient: db.ingredientDao().getRecipeIngredients(db.recipeDao().findRecipeByName(recipeName).get(0).getRecipeId())
                      ) {
                     ingredients.add(ingredient.getIdentifier());
                 }
             }
-        }).start();
+        });
+        t1.start();
+        t1.join();
         return ingredients;
     }
 
-    public ArrayList<String> getRecipeSteps(final String recipeName) {
+    public ArrayList<String> getRecipeSteps(final String recipeName) throws InterruptedException {
         final ArrayList<String> steps = new ArrayList<>();
-        new Thread(new Runnable() {
+       Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                for (Step step: db.recipeDao().getRecipeSteps(db.recipeDao().findRecipeByName(recipeName).get(0).getRecipeId())
+                for (Step step: db.stepDao().getRecipeSteps(db.recipeDao().findRecipeByName(recipeName).get(0).getRecipeId())
                 ) {
                     steps.add(step.getStepString());
                 }
             }
-        }).start();
-        return steps;
+        });
+       t1.start();
+       t1.join();
+       return steps;
     }
 }

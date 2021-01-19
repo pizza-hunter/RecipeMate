@@ -23,6 +23,7 @@ public class RecipeListItemDetailActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
     private int layoutCounter;
     private TextView recipeTitle;
+    private TextView ingredientsTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class RecipeListItemDetailActivity extends AppCompatActivity {
         linearLayout = findViewById(R.id.linearLayoutRecipeItemDetail);
         layoutCounter = 1;
         recipeTitle = findViewById(R.id.recipeNameTitle);
+        ingredientsTextView = findViewById(R.id.detailIngredientsTextView);
 
         new Thread(new Runnable() {
             @Override
@@ -40,11 +42,11 @@ public class RecipeListItemDetailActivity extends AppCompatActivity {
                 intent = getIntent();
                 try {
                     recipe = dbm.getRecipe(intent.getStringExtra("name")).get(0);
+                    ingredientStrings = dbm.getRecipeIngredients(recipe.getName());
+                    stepStrings = dbm.getRecipeSteps(recipe.getName());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                ingredientStrings = dbm.getRecipeIngredients(recipe.getName());
-                stepStrings = dbm.getRecipeSteps(recipe.getName());
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -57,13 +59,20 @@ public class RecipeListItemDetailActivity extends AppCompatActivity {
     }
 
     public void generateIngredients(){
+//        for (String ingredient: ingredientStrings
+//             ) {
+//            TextView textView = new TextView(getApplicationContext());
+//            textView.setText(ingredient);
+//            linearLayout.addView(textView,layoutCounter);
+//            layoutCounter++;
+//        }
+
+       StringBuilder sb = new StringBuilder();
         for (String ingredient: ingredientStrings
              ) {
-            TextView textView = new TextView(getApplicationContext());
-            textView.setText(ingredient);
-            linearLayout.addView(textView,layoutCounter);
-            layoutCounter++;
+            sb.append(ingredient + "\n");
         }
+        ingredientsTextView.setText(sb.toString());
     }
     /*
         Get information about recipe through intent name var, as ID's won't match positions if tuples are deleted.
